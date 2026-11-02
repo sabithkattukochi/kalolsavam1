@@ -14,6 +14,7 @@ import {
   GalleryMedia,
   Announcement,
   AdminProfile,
+  AdminRole,
   AuditLog,
   TeamLeaderboardItem,
   StudentLeaderboardItem,
@@ -1003,7 +1004,45 @@ class DataStore {
   loginAs(role: 'SUPER_ADMIN' | 'EVENT_COORDINATOR' | 'SCORE_MANAGER'): AdminProfile {
     const found = this.admins.find((a) => a.role === role) || this.admins[0];
     this.currentAdmin = found;
+    this.saveToStorage();
     return found;
+  }
+
+  authenticate(email: string, password: string): { success: boolean; admin?: AdminProfile; error?: string } {
+    const cleanEmail = email.trim().toLowerCase();
+    const admin = this.admins.find((a) => a.email.toLowerCase() === cleanEmail);
+    if (!admin) {
+      return { success: false, error: 'No administrative account found for this email address.' };
+    }
+    const validPasswords = ['victoria@2026', 'admin123', 'kalolsavam2026', 'password'];
+    if (!validPasswords.includes(password.trim())) {
+      return { success: false, error: 'Incorrect security password. Please check your credentials.' };
+    }
+    this.currentAdmin = admin;
+    this.saveToStorage();
+    return { success: true, admin };
+  }
+
+  logout() {
+    this.currentAdmin = null;
+    this.saveToStorage();
+  }
+
+  createAdmin(data: { email: string; full_name: string; role: AdminRole; avatar_url?: string }): AdminProfile {
+    const exists = this.admins.find((a) => a.email.toLowerCase() === data.email.toLowerCase().trim());
+    if (exists) throw new Error('An administrator with this email already exists.');
+    const newAdmin: AdminProfile = {
+      id: `admin-${Date.now()}`,
+      email: data.email.trim(),
+      full_name: data.full_name.trim(),
+      role: data.role,
+      avatar_url: data.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      created_at: new Date().toISOString(),
+    };
+    this.admins.push(newAdmin);
+    this.currentAdmin = newAdmin;
+    this.saveToStorage();
+    return newAdmin;
   }
 
   // --- Festivals ---

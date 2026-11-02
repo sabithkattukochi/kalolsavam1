@@ -188,6 +188,19 @@ export function AdminSidebar({ currentRole = 'SUPER_ADMIN', onRoleChange }: Admi
           <ExternalLink className="w-3.5 h-3.5 text-teal-400" />
           View Public Website
         </Link>
+
+        {/* Sign Out Button */}
+        <button
+          type="button"
+          onClick={() => {
+            dataStore.logout();
+            window.location.href = '/login';
+          }}
+          className="flex items-center justify-center gap-2 w-full py-2 px-3 text-xs font-bold text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-xl transition-all border border-rose-500/20"
+        >
+          <LogOut className="w-3.5 h-3.5" />
+          Sign Out of Console
+        </button>
       </div>
     </aside>
   );

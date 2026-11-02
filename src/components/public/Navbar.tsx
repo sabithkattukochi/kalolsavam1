@@ -1,9 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Calendar, Trophy, Image, Bell, Menu, X, Shield, Clock, Music, Palette } from 'lucide-react';
+import {
+  Sparkles,
+  Calendar,
+  Trophy,
+  Image,
+  Bell,
+  Menu,
+  X,
+  Shield,
+  Clock,
+  Music,
+  Palette,
+  User,
+  LogIn,
+  LogOut,
+  ChevronDown,
+} from 'lucide-react';
+import { dataStore } from '@/lib/data-store';
+import { AdminProfile } from '@/types/database';
 
 interface NavbarProps {
   festivalName?: string;
@@ -13,6 +31,19 @@ interface NavbarProps {
 export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: NavbarProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [currentAdmin, setCurrentAdmin] = useState<AdminProfile | null>(null);
+
+  useEffect(() => {
+    setCurrentAdmin(dataStore.getCurrentAdmin());
+  }, [pathname]);
+
+  const handleLogout = () => {
+    dataStore.logout();
+    setCurrentAdmin(null);
+    setUserDropdownOpen(false);
+    window.location.href = '/';
+  };
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -82,8 +113,62 @@ export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: Na
               Live Scores
             </Link>
 
+            {/* Login 👤 ▾ Option (Reference: Kerala Kalolsavam Image 2) */}
+            {currentAdmin ? (
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-teal-500/40 text-xs font-bold text-white transition-all shadow-sm"
+                >
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-emerald-400 to-cyan-500 p-[1.5px]">
+                    <img
+                      src={currentAdmin.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                      alt={currentAdmin.full_name}
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  </div>
+                  <span className="text-teal-300 font-semibold">{currentAdmin.full_name.split(' ')[0]}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                </button>
+
+                {userDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-52 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl p-2 z-50 space-y-1 animate-in fade-in slide-in-from-top-2">
+                    <div className="px-3 py-2 border-b border-slate-800 text-left">
+                      <p className="text-xs font-bold text-white truncate">{currentAdmin.full_name}</p>
+                      <p className="text-[10px] text-teal-400 font-semibold uppercase">{currentAdmin.role.replace('_', ' ')}</p>
+                    </div>
+                    <Link
+                      href="/admin/dashboard"
+                      onClick={() => setUserDropdownOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2 text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800 rounded-xl transition-colors"
+                    >
+                      <Shield className="w-3.5 h-3.5 text-teal-400" />
+                      Admin Console
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors text-left"
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-slate-200 bg-slate-900 hover:bg-slate-800 hover:text-white border border-slate-700/80 hover:border-teal-500/50 rounded-xl transition-all shadow-sm"
+              >
+                <User className="w-3.5 h-3.5 text-teal-400" />
+                <span>Login ▾</span>
+              </Link>
+            )}
+
             <Link
-              href="/admin/dashboard"
+              href={currentAdmin ? '/admin/dashboard' : '/login'}
               className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 rounded-xl shadow-md shadow-teal-500/25 transition-all transform hover:-translate-y-0.5"
             >
               <Shield className="w-3.5 h-3.5" />
@@ -94,11 +179,11 @@ export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: Na
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
             <Link
-              href="/admin/dashboard"
+              href={currentAdmin ? '/admin/dashboard' : '/login'}
               className="p-2 text-teal-400 bg-teal-500/10 rounded-lg border border-teal-500/20"
               title="Admin Portal"
             >
-              <Shield className="w-4 h-4" />
+              <User className="w-4 h-4" />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -124,12 +209,12 @@ export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: Na
               Live Leaderboard
             </Link>
             <Link
-              href="/admin/dashboard"
+              href={currentAdmin ? '/admin/dashboard' : '/login'}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 py-2.5 px-3 text-xs font-bold text-slate-950 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-lg"
             >
               <Shield className="w-4 h-4" />
-              Admin Portal
+              {currentAdmin ? 'Admin Console' : 'Admin Login'}
             </Link>
           </div>
           <div className="flex flex-col space-y-1">
