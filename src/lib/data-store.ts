@@ -1014,7 +1014,7 @@ class DataStore {
     if (!admin) {
       return { success: false, error: 'No administrative account found for this email address.' };
     }
-    const validPasswords = ['victoria@2026', 'admin123', 'kalolsavam2026', 'password'];
+    const validPasswords = ['ihrd@2026', 'victoria@2026', 'admin123', 'kalolsavam2026', 'password'];
     if (!validPasswords.includes(password.trim())) {
       return { success: false, error: 'Incorrect security password. Please check your credentials.' };
     }

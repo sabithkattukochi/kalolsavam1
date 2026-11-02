@@ -34,7 +34,7 @@ export default function LoginPage() {
   const [regName, setRegName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regRole, setRegRole] = useState<AdminRole>('EVENT_COORDINATOR');
-  const [regPassword, setRegPassword] = useState('victoria@2026');
+  const [regPassword, setRegPassword] = useState('ihrd@2026');
 
   // UI status
   const [loading, setLoading] = useState(false);
@@ -197,7 +197,7 @@ export default function LoginPage() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold text-slate-300">Security Password</label>
-                  <span className="text-[10px] text-slate-400">Default: victoria@2026</span>
+                  <span className="text-[10px] text-slate-400">Default: ihrd@2026</span>
                 </div>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
@@ -322,7 +322,7 @@ export default function LoginPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <button
                 type="button"
-                onClick={() => autofillCredentials('admin@fest.org', 'victoria@2026')}
+                onClick={() => autofillCredentials('admin@fest.org', 'ihrd@2026')}
                 className="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-left transition-colors group"
               >
                 <div className="flex items-center gap-1.5 text-emerald-400 text-[11px] font-black">
@@ -334,7 +334,7 @@ export default function LoginPage() {
 
               <button
                 type="button"
-                onClick={() => autofillCredentials('coordinator@fest.org', 'victoria@2026')}
+                onClick={() => autofillCredentials('coordinator@fest.org', 'ihrd@2026')}
                 className="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-left transition-colors group"
               >
                 <div className="flex items-center gap-1.5 text-teal-400 text-[11px] font-black">
@@ -346,7 +346,7 @@ export default function LoginPage() {
 
               <button
                 type="button"
-                onClick={() => autofillCredentials('scores@fest.org', 'victoria@2026')}
+                onClick={() => autofillCredentials('scores@fest.org', 'ihrd@2026')}
                 className="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-left transition-colors group"
               >
                 <div className="flex items-center gap-1.5 text-cyan-400 text-[11px] font-black">
