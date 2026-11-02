@@ -57,7 +57,7 @@ export default function AdminAuditLogsPage() {
       case 'UPDATE':
       case 'EDIT':
       case 'SAVE_RESULT':
-        return 'bg-amber-500/15 text-amber-400 border-amber-500/30';
+        return 'bg-teal-500/15 text-teal-400 border-teal-500/30';
       case 'DELETE':
       case 'REMOVE':
         return 'bg-rose-500/15 text-rose-400 border-rose-500/30';
@@ -142,7 +142,7 @@ export default function AdminAuditLogsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by admin, action, or entity ID..."
-                className="w-full pl-9 pr-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500"
+                className="w-full pl-9 pr-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500"
               />
             </div>
 
@@ -152,7 +152,7 @@ export default function AdminAuditLogsPage() {
               <select
                 value={selectedAction}
                 onChange={(e) => setSelectedAction(e.target.value)}
-                className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium"
+                className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-teal-500 font-medium"
               >
                 <option value="ALL">All Actions ({uniqueActions.length})</option>
                 {uniqueActions.map((act) => (
@@ -169,7 +169,7 @@ export default function AdminAuditLogsPage() {
               <select
                 value={selectedEntity}
                 onChange={(e) => setSelectedEntity(e.target.value)}
-                className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium"
+                className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-teal-500 font-medium"
               >
                 <option value="ALL">All Entities ({uniqueEntities.length})</option>
                 {uniqueEntities.map((ent) => (
@@ -254,7 +254,7 @@ export default function AdminAuditLogsPage() {
                             onClick={() => setSelectedLog(log)}
                             className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-[11px] font-bold transition-all border border-slate-700/60 cursor-pointer"
                           >
-                            <Eye className="w-3 h-3 text-amber-400" />
+                            <Eye className="w-3 h-3 text-teal-400" />
                             Inspect
                           </button>
                         </td>

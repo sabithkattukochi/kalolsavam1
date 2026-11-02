@@ -87,8 +87,8 @@ export default function AdminDashboardPage() {
       label: 'Warrior Teams',
       value: teams.length,
       icon: Shield,
-      color: 'text-amber-400',
-      bg: 'bg-amber-500/10 border-amber-500/20',
+      color: 'text-teal-400',
+      bg: 'bg-teal-500/10 border-teal-500/20',
       href: '/admin/teams',
     },
     {
@@ -135,8 +135,8 @@ export default function AdminDashboardPage() {
       label: 'Total Points Awarded',
       value: formatPoints(totalPointsAwarded),
       icon: Trophy,
-      color: 'text-amber-300',
-      bg: 'bg-amber-500/15 border-amber-500/30',
+      color: 'text-teal-300',
+      bg: 'bg-teal-500/15 border-teal-500/30',
       href: '/admin/points',
     },
   ];
@@ -153,9 +153,9 @@ export default function AdminDashboardPage() {
 
         <main className="flex-1 p-6 md:p-8 space-y-8">
           {/* Quick Notice Banner */}
-          <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-slate-900 border border-amber-500/30 flex items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-slate-900 border border-teal-500/30 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400 shrink-0">
+              <div className="p-2 rounded-xl bg-teal-500/20 text-teal-400 shrink-0">
                 <Sparkles className="w-5 h-5" />
               </div>
               <p className="text-xs text-slate-300">
@@ -164,7 +164,7 @@ export default function AdminDashboardPage() {
             </div>
             <Link
               href="/admin/enrollments"
-              className="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider shrink-0 transition-colors"
+              className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold text-xs uppercase tracking-wider shrink-0 transition-colors"
             >
               Enroll Participants
             </Link>
@@ -187,7 +187,7 @@ export default function AdminDashboardPage() {
                     </div>
                   </div>
                   <div className="mt-4 flex items-baseline justify-between">
-                    <span className="text-2xl sm:text-3xl font-black text-white group-hover:text-amber-300 transition-colors">
+                    <span className="text-2xl sm:text-3xl font-black text-white group-hover:text-teal-300 transition-colors">
                       {s.value}
                     </span>
                     <span className="text-[10px] text-slate-400 group-hover:translate-x-1 transition-transform">
@@ -207,9 +207,9 @@ export default function AdminDashboardPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <Link
                 href="/admin/students?action=add"
-                className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-amber-500/40 text-left transition-all group"
+                className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-teal-500/40 text-left transition-all group"
               >
-                <PlusCircle className="w-5 h-5 text-amber-400 mb-1.5" />
+                <PlusCircle className="w-5 h-5 text-teal-400 mb-1.5" />
                 <span className="text-xs font-bold text-white block">Add Student</span>
                 <span className="text-[10px] text-slate-400">Auto-ID generation</span>
               </Link>
@@ -254,7 +254,7 @@ export default function AdminDashboardPage() {
                 </div>
                 <Link
                   href="/admin/points"
-                  className="text-xs font-bold text-amber-400 hover:underline"
+                  className="text-xs font-bold text-teal-400 hover:underline"
                 >
                   Configure Rules
                 </Link>
@@ -289,7 +289,7 @@ export default function AdminDashboardPage() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-base font-black text-white">Team Rank Table</h3>
-                  <Link href="/admin/teams" className="text-xs font-bold text-amber-400 hover:underline">
+                  <Link href="/admin/teams" className="text-xs font-bold text-teal-400 hover:underline">
                     Manage Teams
                   </Link>
                 </div>
@@ -301,7 +301,7 @@ export default function AdminDashboardPage() {
                       className="p-3 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center font-black text-xs text-amber-400">
+                        <span className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center font-black text-xs text-teal-400">
                           #{team.rank}
                         </span>
                         <div>
@@ -312,7 +312,7 @@ export default function AdminDashboardPage() {
                         </div>
                       </div>
 
-                      <span className="text-sm font-black text-amber-400">
+                      <span className="text-sm font-black text-teal-400">
                         {formatPoints(team.total_points)} pts
                       </span>
                     </div>
@@ -322,7 +322,7 @@ export default function AdminDashboardPage() {
 
               <div className="pt-4 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
                 <span>Calculated via Point Rules</span>
-                <Link href="/leaderboard" target="_blank" className="text-amber-400 font-bold hover:underline">
+                <Link href="/leaderboard" target="_blank" className="text-teal-400 font-bold hover:underline">
                   Public Board →
                 </Link>
               </div>
@@ -336,7 +336,7 @@ export default function AdminDashboardPage() {
                 <h3 className="text-base font-black text-white">Recent Admin Activity Audit</h3>
                 <p className="text-xs text-slate-400">Automated log of administrative actions and results publishing</p>
               </div>
-              <Link href="/admin/audit-logs" className="text-xs font-bold text-amber-400 hover:underline">
+              <Link href="/admin/audit-logs" className="text-xs font-bold text-teal-400 hover:underline">
                 View Full Log ({auditLogs.length})
               </Link>
             </div>
@@ -348,7 +348,7 @@ export default function AdminDashboardPage() {
                   className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between text-xs"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700">
+                    <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-slate-800 text-teal-300 border border-slate-700">
                       {log.action}
                     </span>
                     <span className="text-slate-300">

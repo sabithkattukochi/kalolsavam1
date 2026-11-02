@@ -314,7 +314,7 @@ export default function StudentsManagementPage() {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={openAddModal}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
               >
                 <Plus className="w-4 h-4" />
                 Add Student
@@ -324,7 +324,7 @@ export default function StudentsManagementPage() {
                 onClick={() => setIsImportModalOpen(true)}
                 className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs border border-slate-700 transition-all"
               >
-                <Upload className="w-3.5 h-3.5 text-amber-400" />
+                <Upload className="w-3.5 h-3.5 text-teal-400" />
                 Import CSV
               </button>
 
@@ -355,7 +355,7 @@ export default function StudentsManagementPage() {
                 placeholder="Search by student name, ID, course..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500 font-medium"
               />
             </div>
 
@@ -363,7 +363,7 @@ export default function StudentsManagementPage() {
               <select
                 value={selectedTeam}
                 onChange={(e) => setSelectedTeam(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
               >
                 <option value="ALL">All Contesting Teams</option>
                 {teams.map((t) => (
@@ -378,7 +378,7 @@ export default function StudentsManagementPage() {
               <select
                 value={selectedDept}
                 onChange={(e) => setSelectedDept(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
               >
                 <option value="ALL">All Departments</option>
                 {departments.map((d) => (
@@ -408,7 +408,7 @@ export default function StudentsManagementPage() {
                 <tbody className="divide-y divide-slate-800/60">
                   {filteredStudents.map((st) => (
                     <tr key={st.id} className="hover:bg-slate-800/40 transition-colors">
-                      <td className="py-3.5 px-4 font-mono font-bold text-amber-400">
+                      <td className="py-3.5 px-4 font-mono font-bold text-teal-400">
                         {st.student_id}
                       </td>
                       <td className="py-3.5 px-4 font-bold text-white">
@@ -444,7 +444,7 @@ export default function StudentsManagementPage() {
                           <button
                             onClick={() => setTransferringStudent(st)}
                             title="Transfer Student to Another Team"
-                            className="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all"
+                            className="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-teal-400 hover:border-teal-500/40 transition-all"
                           >
                             <ArrowRightLeft className="w-3.5 h-3.5" />
                           </button>
@@ -627,7 +627,7 @@ export default function StudentsManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Save Record
                 </button>
@@ -652,7 +652,7 @@ export default function StudentsManagementPage() {
 
             <div className="space-y-2 text-xs">
               <p className="text-slate-300">
-                Transfer <strong className="text-white">{transferringStudent.full_name}</strong> ({transferringStudent.student_id}) from current team <strong className="text-amber-400">{transferringStudent.team?.name}</strong>.
+                Transfer <strong className="text-white">{transferringStudent.full_name}</strong> ({transferringStudent.student_id}) from current team <strong className="text-teal-400">{transferringStudent.team?.name}</strong>.
               </p>
               <p className="text-[11px] text-slate-400">
                 Note: This will also automatically update team affiliations on all individual event registrations for this student.
@@ -668,13 +668,13 @@ export default function StudentsManagementPage() {
                     <button
                       key={t.id}
                       onClick={() => handleTransfer(t.id)}
-                      className="w-full p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/50 flex items-center justify-between text-xs font-bold transition-all text-left"
+                      className="w-full p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-teal-500/50 flex items-center justify-between text-xs font-bold transition-all text-left"
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="w-3 h-3 rounded-full" style={{ backgroundColor: t.color }} />
                         <span className="text-white">{t.name}</span>
                       </div>
-                      <span className="text-amber-400">Assign →</span>
+                      <span className="text-teal-400">Assign →</span>
                     </button>
                   ))}
               </div>
@@ -698,7 +698,7 @@ export default function StudentsManagementPage() {
 
             <form onSubmit={handleImportCSV} className="space-y-3 text-xs">
               <p className="text-slate-300">
-                Paste your CSV content below. Required columns: <code className="text-amber-400">Full Name, Course, Department, Class, Team</code>
+                Paste your CSV content below. Required columns: <code className="text-teal-400">Full Name, Course, Department, Class, Team</code>
               </p>
 
               <textarea
@@ -707,7 +707,7 @@ export default function StudentsManagementPage() {
                 placeholder={`Full Name,Course,Department,Class,Team\nAnjali V,B.A. English,English,2nd Year,RUBY\nRohan P,B.Com,Commerce,3rd Year,EMERALD`}
                 value={importCsvText}
                 onChange={(e) => setImportCsvText(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 font-mono text-slate-200 text-xs focus:outline-none focus:border-amber-500"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 font-mono text-slate-200 text-xs focus:outline-none focus:border-teal-500"
               />
 
               <div className="pt-3 border-t border-slate-800 flex items-center justify-end gap-2">
@@ -720,7 +720,7 @@ export default function StudentsManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Start Import
                 </button>

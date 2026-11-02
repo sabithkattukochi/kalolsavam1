@@ -104,12 +104,12 @@ export default function LeaderboardPage() {
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div className="max-w-2xl space-y-3">
-              <span className="text-xs font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">
+              <span className="text-xs font-black uppercase tracking-wider text-teal-400 bg-teal-500/10 px-3.5 py-1.5 rounded-full border border-teal-500/20">
                 Live Tabulation Standings
               </span>
               <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight flex items-center gap-3">
                 <span>Festival Leaderboard</span>
-                <Trophy className="w-8 h-8 sm:w-12 h-12 text-amber-400" />
+                <Trophy className="w-8 h-8 sm:w-12 h-12 text-teal-400" />
               </h1>
               <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
                 Real-time official standings for {festival.name}. Points recalculated dynamically as results are certified.
@@ -122,13 +122,13 @@ export default function LeaderboardPage() {
                 onClick={triggerPrint}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs border border-slate-700 transition-all"
               >
-                <Printer className="w-3.5 h-3.5 text-amber-400" />
+                <Printer className="w-3.5 h-3.5 text-teal-400" />
                 Print Standings
               </button>
 
               <button
                 onClick={handleExportCSV}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md"
               >
                 <Download className="w-3.5 h-3.5" />
                 Export Leaderboard
@@ -142,7 +142,7 @@ export default function LeaderboardPage() {
               onClick={() => setActiveTab('OVERALL')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
                 activeTab === 'OVERALL'
-                  ? 'bg-amber-400 text-slate-950 shadow-md'
+                  ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -152,7 +152,7 @@ export default function LeaderboardPage() {
               onClick={() => setActiveTab('CATEGORIES')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
                 activeTab === 'CATEGORIES'
-                  ? 'bg-amber-400 text-slate-950 shadow-md'
+                  ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -162,7 +162,7 @@ export default function LeaderboardPage() {
               onClick={() => setActiveTab('STUDENTS')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
                 activeTab === 'STUDENTS'
-                  ? 'bg-amber-400 text-slate-950 shadow-md'
+                  ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -184,7 +184,7 @@ export default function LeaderboardPage() {
                       key={team.team_id}
                       className={`relative rounded-3xl p-6 border flex flex-col justify-between transition-all duration-300 ${
                         isFirst
-                          ? 'bg-gradient-to-b from-amber-500/20 via-slate-900 to-slate-950 border-amber-500 shadow-2xl shadow-amber-950/40 ring-1 ring-amber-500/40'
+                          ? 'bg-gradient-to-b from-amber-500/20 via-slate-900 to-slate-950 border-amber-500 shadow-2xl shadow-teal-950/40 ring-1 ring-teal-500/40'
                           : 'bg-slate-900/60 border-slate-800'
                       }`}
                     >
@@ -233,7 +233,7 @@ export default function LeaderboardPage() {
                         {/* Medals */}
                         <div className="grid grid-cols-3 gap-2 text-center text-xs">
                           <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
-                            <span className="text-amber-400 font-bold block text-sm">{team.first_count}</span>
+                            <span className="text-teal-400 font-bold block text-sm">{team.first_count}</span>
                             <span className="text-[10px] text-slate-400 font-semibold uppercase">1st (Gold)</span>
                           </div>
                           <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
@@ -317,7 +317,7 @@ export default function LeaderboardPage() {
                     <tbody className="divide-y divide-slate-800/60">
                       {teams.map((t) => (
                         <tr key={t.team_id} className="hover:bg-slate-800/40 transition-colors">
-                          <td className="py-4 px-6 font-black text-base text-amber-400">
+                          <td className="py-4 px-6 font-black text-base text-teal-400">
                             #{t.rank}
                           </td>
                           <td className="py-4 px-6">
@@ -334,12 +334,12 @@ export default function LeaderboardPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="py-4 px-6 text-center font-bold text-amber-400">{t.first_count}</td>
+                          <td className="py-4 px-6 text-center font-bold text-teal-400">{t.first_count}</td>
                           <td className="py-4 px-6 text-center font-bold text-slate-300">{t.second_count}</td>
                           <td className="py-4 px-6 text-center font-bold text-amber-600">{t.third_count}</td>
                           <td className="py-4 px-6 text-center font-bold text-emerald-400">{t.grade_a_count}</td>
                           <td className="py-4 px-6 text-center font-semibold text-slate-300">{t.total_awards}</td>
-                          <td className="py-4 px-6 text-right font-black text-amber-400 text-lg">
+                          <td className="py-4 px-6 text-right font-black text-teal-400 text-lg">
                             {formatPoints(t.total_points)}
                           </td>
                         </tr>
@@ -387,7 +387,7 @@ export default function LeaderboardPage() {
                               {formatPoints(t.category_points[c.id] || 0)} pts
                             </td>
                           ))}
-                          <td className="py-4 px-6 text-right font-black text-amber-400 text-base">
+                          <td className="py-4 px-6 text-right font-black text-teal-400 text-base">
                             {formatPoints(t.total_points)} pts
                           </td>
                         </tr>
@@ -424,11 +424,11 @@ export default function LeaderboardPage() {
                   {students.map((st, idx) => (
                     <div
                       key={st.student_id}
-                      className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-amber-500/40 transition-all flex flex-col justify-between"
+                      className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-teal-500/40 transition-all flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-sm">
+                          <span className="w-8 h-8 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-black text-sm">
                             #{idx + 1}
                           </span>
                           <span
@@ -450,7 +450,7 @@ export default function LeaderboardPage() {
                         <p className="text-[11px] text-slate-400">ID: {st.unique_id}</p>
 
                         <div className="my-4 p-3 rounded-2xl bg-slate-950 border border-slate-800 text-center">
-                          <span className="text-3xl font-black text-amber-400 block">
+                          <span className="text-3xl font-black text-teal-400 block">
                             {formatPoints(st.total_points)}
                           </span>
                           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
@@ -478,7 +478,7 @@ export default function LeaderboardPage() {
                       </div>
 
                       <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                        <span>Gold: <strong className="text-amber-400">{st.first_count}</strong></span>
+                        <span>Gold: <strong className="text-teal-400">{st.first_count}</strong></span>
                         <span>Silver: <strong className="text-slate-300">{st.second_count}</strong></span>
                         <span>Bronze: <strong className="text-amber-600">{st.third_count}</strong></span>
                       </div>

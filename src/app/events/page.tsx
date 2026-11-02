@@ -104,7 +104,7 @@ export default function EventsPage() {
                   placeholder="Search by event title, code, venue..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-2xl pl-11 pr-4 py-3 text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 font-medium"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-2xl pl-11 pr-4 py-3 text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500 font-medium"
                 />
               </div>
 
@@ -113,7 +113,7 @@ export default function EventsPage() {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
                 >
                   <option value="ALL">All Categories</option>
                   {categories.map((c) => (
@@ -129,7 +129,7 @@ export default function EventsPage() {
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
                 >
                   <option value="ALL">All Event Types</option>
                   <option value="INDIVIDUAL">Individual Solo</option>
@@ -147,7 +147,7 @@ export default function EventsPage() {
                   onClick={() => setSelectedStatus(st)}
                   className={`px-3 py-1 rounded-xl font-bold uppercase tracking-wider transition-all ${
                     selectedStatus === st
-                      ? 'bg-amber-400 text-slate-950 shadow-sm'
+                      ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-sm'
                       : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
                   }`}
                 >
@@ -163,7 +163,7 @@ export default function EventsPage() {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-amber-400 hover:underline"
+                className="text-teal-400 hover:underline"
               >
                 Clear Search
               </button>
@@ -176,12 +176,12 @@ export default function EventsPage() {
               <div
                 key={ev.id}
                 onClick={() => openEventModal(ev)}
-                className="group p-6 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-amber-500/40 hover:bg-slate-900/90 transition-all cursor-pointer flex flex-col justify-between"
+                className="group p-6 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-teal-500/40 hover:bg-slate-900/90 transition-all cursor-pointer flex flex-col justify-between"
               >
                 <div>
                   {/* Top Bar: Code & Type */}
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-black px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                    <span className="text-xs font-black px-2.5 py-1 rounded-lg bg-teal-500/15 text-teal-300 border border-teal-500/30">
                       {ev.code}
                     </span>
                     <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
@@ -190,7 +190,7 @@ export default function EventsPage() {
                   </div>
 
                   {/* Title & Category */}
-                  <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors line-clamp-1">
+                  <h3 className="text-lg font-bold text-white group-hover:text-teal-300 transition-colors line-clamp-1">
                     {ev.name}
                   </h3>
                   <p className="text-xs text-rose-400 font-semibold mt-0.5">
@@ -226,7 +226,7 @@ export default function EventsPage() {
                       <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                       <span className="truncate">{ev.venue}</span>
                     </span>
-                    <span className="text-amber-400 font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-0.5">
+                    <span className="text-teal-400 font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-0.5">
                       Details <ChevronRight className="w-3 h-3" />
                     </span>
                   </div>
@@ -246,7 +246,7 @@ export default function EventsPage() {
                   setSelectedType('ALL');
                   setSelectedStatus('ALL');
                 }}
-                className="px-4 py-2 text-xs font-bold text-amber-400 bg-amber-500/10 rounded-xl border border-amber-500/30"
+                className="px-4 py-2 text-xs font-bold text-teal-400 bg-teal-500/10 rounded-xl border border-teal-500/30"
               >
                 Reset all filters
               </button>
@@ -265,7 +265,7 @@ export default function EventsPage() {
             <div className="p-6 border-b border-slate-800 flex items-start justify-between bg-slate-950/60">
               <div>
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-xs font-black px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  <span className="text-xs font-black px-2.5 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">
                     {activeModalEvent.code}
                   </span>
                   <span className="text-xs font-bold text-rose-400">
@@ -301,7 +301,7 @@ export default function EventsPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-amber-400" /> Date & Time
+                    <Clock className="w-3.5 h-3.5 text-teal-400" /> Date & Time
                   </span>
                   <p className="font-bold text-white text-sm">
                     {formatDate(activeModalEvent.date)}
@@ -338,7 +338,7 @@ export default function EventsPage() {
                   {activeModalEvent.coordinator_phone && (
                     <a
                       href={`tel:${activeModalEvent.coordinator_phone}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-200 hover:text-amber-400"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-200 hover:text-teal-400"
                     >
                       <Phone className="w-3.5 h-3.5 text-emerald-400" />
                       {activeModalEvent.coordinator_phone}
@@ -350,7 +350,7 @@ export default function EventsPage() {
               {/* Rules & Guidelines */}
               {activeModalEvent.rules && (
                 <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5" /> Official Competition Rules
                   </h4>
                   <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
@@ -380,7 +380,7 @@ export default function EventsPage() {
                           className="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between"
                         >
                           <div className="min-w-0">
-                            <span className="text-[10px] font-black text-amber-400">
+                            <span className="text-[10px] font-black text-teal-400">
                               Chest #{reg.chest_number}
                             </span>
                             <p className="text-xs font-bold text-white truncate">
@@ -412,7 +412,7 @@ export default function EventsPage() {
                           className="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between"
                         >
                           <div className="min-w-0">
-                            <span className="text-[10px] font-black text-amber-400">
+                            <span className="text-[10px] font-black text-teal-400">
                               Chest #{grp.chest_number}
                             </span>
                             <p className="text-xs font-bold text-white truncate">

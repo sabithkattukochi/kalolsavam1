@@ -79,21 +79,21 @@ export function AdminSidebar({ currentRole = 'SUPER_ADMIN', onRoleChange }: Admi
   ];
 
   return (
-    <aside className="w-72 bg-slate-950 border-r border-slate-800/80 flex flex-col h-screen sticky top-0 select-none z-30">
+    <aside className="w-72 bg-slate-950 border-r border-cyan-900/30 flex flex-col h-screen sticky top-0 select-none z-30">
       {/* Brand Header */}
       <div className="p-5 border-b border-slate-800/80 flex items-center justify-between">
         <Link href="/admin/dashboard" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-rose-950/40">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-400 via-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-teal-950/40">
             <Sparkles className="w-5 h-5 text-slate-950" />
           </div>
           <div>
             <h1 className="text-base font-extrabold tracking-tight text-white flex items-center gap-1.5">
               <span>KALOLSAVAM</span>
-              <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+              <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                 ADMIN
               </span>
             </h1>
-            <p className="text-[11px] text-slate-400 font-medium">Control & Operations Console</p>
+            <p className="text-[11px] text-teal-200/70 font-medium">Control & Operations Console</p>
           </div>
         </Link>
       </div>
@@ -101,12 +101,12 @@ export function AdminSidebar({ currentRole = 'SUPER_ADMIN', onRoleChange }: Admi
       {/* Active Festival Switcher Pill */}
       <div className="px-5 py-3.5 bg-slate-900/60 border-b border-slate-800/80 flex items-center justify-between">
         <div className="min-w-0">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Active Festival</p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-teal-400">Active Festival</p>
           <p className="text-xs font-bold text-white truncate">{activeFestival.name} ({activeFestival.edition})</p>
         </div>
         <Link
           href="/admin/festivals"
-          className="text-[11px] text-slate-400 hover:text-amber-300 px-2 py-1 bg-slate-800 rounded border border-slate-700/60 transition-colors"
+          className="text-[11px] text-slate-400 hover:text-teal-300 px-2 py-1 bg-slate-800 rounded border border-slate-700/60 transition-colors"
         >
           Change
         </Link>
@@ -128,7 +128,7 @@ export function AdminSidebar({ currentRole = 'SUPER_ADMIN', onRoleChange }: Admi
                   href={item.href}
                   className={`flex items-center justify-between px-3 py-2 text-xs font-bold rounded-xl transition-all ${
                     isActive
-                      ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-sm'
+                      ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/15 text-emerald-300 border border-emerald-500/35 shadow-sm'
                       : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
                   }`}
                 >
@@ -136,16 +136,16 @@ export function AdminSidebar({ currentRole = 'SUPER_ADMIN', onRoleChange }: Admi
                     <Icon
                       className={`w-4 h-4 ${
                         isActive
-                          ? 'text-amber-400'
+                          ? 'text-teal-400'
                           : item.highlight
-                          ? 'text-rose-400'
+                          ? 'text-cyan-400'
                           : 'text-slate-400'
                       }`}
                     />
                     <span>{item.label}</span>
                   </div>
                   {item.badge && (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
                       {item.badge}
                     </span>
                   )}
@@ -170,7 +170,7 @@ export function AdminSidebar({ currentRole = 'SUPER_ADMIN', onRoleChange }: Admi
             <select
               value={currentRole}
               onChange={(e) => onRoleChange(e.target.value as AdminRole)}
-              className="w-full text-xs bg-slate-950 border border-slate-800 rounded-lg p-1.5 text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+              className="w-full text-xs bg-slate-950 border border-slate-800 rounded-lg p-1.5 text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
             >
               <option value="SUPER_ADMIN">Super Admin (All Modules)</option>
               <option value="EVENT_COORDINATOR">Event Coordinator (Events & Participants)</option>
@@ -185,7 +185,7 @@ export function AdminSidebar({ currentRole = 'SUPER_ADMIN', onRoleChange }: Admi
           target="_blank"
           className="flex items-center justify-center gap-2 w-full py-2 px-3 text-xs font-bold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 rounded-xl transition-all border border-slate-700/60"
         >
-          <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
+          <ExternalLink className="w-3.5 h-3.5 text-teal-400" />
           View Public Website
         </Link>
       </div>

@@ -24,12 +24,12 @@ export function AdminHeader({ title, description }: AdminHeaderProps) {
   const activeFestival = dataStore.getActiveFestival();
 
   return (
-    <header className="sticky top-0 z-20 w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 px-6 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-20 w-full bg-slate-950/85 backdrop-blur-md border-b border-cyan-900/30 px-6 py-4 flex items-center justify-between">
       <div>
         <div className="flex items-center gap-2 text-xs text-slate-400 font-semibold mb-1">
           <span>{activeFestival.name}</span>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <span className="text-amber-400">{title}</span>
+          <span className="text-teal-400">{title}</span>
         </div>
         <h1 className="text-xl font-extrabold text-white tracking-tight">{title}</h1>
         {description && <p className="text-xs text-slate-400 mt-0.5">{description}</p>}
@@ -40,15 +40,15 @@ export function AdminHeader({ title, description }: AdminHeaderProps) {
         <Link
           href="/leaderboard"
           target="_blank"
-          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-xl transition-all"
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-xl transition-all"
         >
-          <Trophy className="w-3.5 h-3.5 text-amber-400" />
+          <Trophy className="w-3.5 h-3.5 text-cyan-400" />
           Live Leaderboard
         </Link>
 
         {/* Current Admin Badge */}
         <div className="flex items-center gap-3 pl-4 border-l border-slate-800">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-500 to-rose-600 p-[2px]">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-400 to-cyan-500 p-[2px]">
             <img
               src={currentAdmin?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'}
               alt={currentAdmin?.full_name || 'Admin'}
@@ -59,7 +59,7 @@ export function AdminHeader({ title, description }: AdminHeaderProps) {
             <p className="text-xs font-bold text-white leading-tight">
               {currentAdmin?.full_name || 'Festival Controller'}
             </p>
-            <p className="text-[10px] text-amber-400 font-semibold tracking-wide">
+            <p className="text-[10px] text-teal-400 font-semibold tracking-wide">
               {currentAdmin?.role.replace('_', ' ') || 'SUPER ADMIN'}
             </p>
           </div>

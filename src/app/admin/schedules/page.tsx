@@ -190,7 +190,7 @@ export default function SchedulesManagementPage() {
                           isConflict ? 'bg-rose-500/10' : ''
                         }`}
                       >
-                        <td className="py-3.5 px-4 font-mono font-bold text-amber-400">
+                        <td className="py-3.5 px-4 font-mono font-bold text-teal-400">
                           {sch.event?.code}
                         </td>
                         <td className="py-3.5 px-4 font-bold text-white">
@@ -226,7 +226,7 @@ export default function SchedulesManagementPage() {
                                 : sch.status === 'DELAYED'
                                 ? 'bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse'
                                 : sch.status === 'RESCHEDULED'
-                                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                                ? 'bg-teal-500/20 text-teal-300 border-teal-500/40'
                                 : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
                             }`}
                           >
@@ -239,7 +239,7 @@ export default function SchedulesManagementPage() {
                         <td className="py-3.5 px-4 text-right">
                           <button
                             onClick={() => openEditModal(sch)}
-                            className="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all inline-flex items-center gap-1"
+                            className="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-teal-400 hover:border-teal-500/40 transition-all inline-flex items-center gap-1"
                           >
                             <Edit2 className="w-3.5 h-3.5" /> Edit
                           </button>
@@ -361,7 +361,7 @@ export default function SchedulesManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Save Schedule
                 </button>

@@ -60,7 +60,7 @@ export default function GalleryPage() {
                 onClick={() => setSelectedAlbum('ALL')}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   selectedAlbum === 'ALL'
-                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-md'
                     : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
                 }`}
               >
@@ -72,7 +72,7 @@ export default function GalleryPage() {
                   onClick={() => setSelectedAlbum(alb.id)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     selectedAlbum === alb.id
-                      ? 'bg-amber-400 text-slate-950 shadow-md'
+                      ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-md'
                       : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
                   }`}
                 >
@@ -94,7 +94,7 @@ export default function GalleryPage() {
               <button
                 onClick={() => setSelectedType('IMAGE')}
                 className={`px-3 py-1 rounded-lg font-bold flex items-center gap-1.5 ${
-                  selectedType === 'IMAGE' ? 'bg-slate-800 text-amber-400' : 'text-slate-400 hover:text-white'
+                  selectedType === 'IMAGE' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 <ImageIcon className="w-3.5 h-3.5" /> Photographs
@@ -126,14 +126,14 @@ export default function GalleryPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
 
                 <div className="absolute top-3 right-3 p-2 rounded-xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ZoomIn className="w-4 h-4 text-amber-400" />
+                  <ZoomIn className="w-4 h-4 text-teal-400" />
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 text-xs">
                   {item.caption && (
                     <p className="font-bold text-white line-clamp-2 leading-snug">{item.caption}</p>
                   )}
-                  <span className="text-[10px] text-amber-400 font-semibold uppercase tracking-wider mt-1 block">
+                  <span className="text-[10px] text-teal-400 font-semibold uppercase tracking-wider mt-1 block">
                     {item.media_type === 'VIDEO' ? 'Video Highlight' : 'Photo Exhibit'}
                   </span>
                 </div>
@@ -178,7 +178,7 @@ export default function GalleryPage() {
             <div className="p-6 bg-slate-950 flex items-center justify-between">
               <div>
                 <p className="font-bold text-white text-base">{lightboxItem.caption || 'Festival Photograph'}</p>
-                <p className="text-xs text-amber-400 font-semibold uppercase mt-0.5">
+                <p className="text-xs text-teal-400 font-semibold uppercase mt-0.5">
                   Official Archive • {festival.name}
                 </p>
               </div>

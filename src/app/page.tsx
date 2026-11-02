@@ -51,7 +51,7 @@ export default function HomePage() {
   if (!mounted) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
-        <Sparkles className="w-8 h-8 text-amber-400 animate-spin" />
+        <Sparkles className="w-8 h-8 text-teal-400 animate-spin" />
       </div>
     );
   }
@@ -62,7 +62,7 @@ export default function HomePage() {
   const categories = dataStore.getCategories();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-amber-500 selection:text-slate-950">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-teal-500 selection:text-slate-950">
       <Navbar festivalName={festival.name} festivalEdition={festival.edition} />
 
       <main className="flex-1">
@@ -71,14 +71,14 @@ export default function HomePage() {
             ======================================================== */}
         <section className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 border-b border-slate-800/80">
           {/* Ambient Lighting Gradients */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-rose-500/15 via-amber-500/10 to-transparent blur-3xl -z-10 pointer-events-none" />
-          <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl -z-10 pointer-events-none" />
-          <div className="absolute top-1/2 -right-24 w-96 h-96 bg-rose-600/15 rounded-full blur-3xl -z-10 pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-teal-500/15 via-emerald-500/10 to-transparent blur-3xl -z-10 pointer-events-none" />
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-cyan-600/15 rounded-full blur-3xl -z-10 pointer-events-none" />
+          <div className="absolute top-1/2 -right-24 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl -z-10 pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto space-y-6">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-amber-500/30 text-xs font-bold text-amber-300 shadow-lg shadow-amber-950/20">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-teal-500/30 text-xs font-bold text-teal-300 shadow-lg shadow-teal-950/20">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>{festival.edition} • {festival.college_name}</span>
               </div>
@@ -88,7 +88,7 @@ export default function HomePage() {
                 <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-white uppercase drop-shadow-sm">
                   {festival.name}
                 </h1>
-                <p className="text-lg sm:text-2xl font-serif italic text-amber-200/90 font-medium">
+                <p className="text-lg sm:text-2xl font-serif italic text-teal-200/90 font-medium">
                   &ldquo;{festival.theme}&rdquo;
                 </p>
               </div>
@@ -102,7 +102,7 @@ export default function HomePage() {
               <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
                 <Link
                   href="/leaderboard"
-                  className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] transition-all"
+                  className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-[1.02] transition-all"
                 >
                   <Trophy className="w-4 h-4 text-slate-950" />
                   Live Leaderboard
@@ -120,7 +120,7 @@ export default function HomePage() {
                   href="/schedule"
                   className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-slate-900/60 hover:bg-slate-900 text-slate-300 font-bold text-sm border border-slate-800 transition-all"
                 >
-                  <Calendar className="w-4 h-4 text-amber-400" />
+                  <Calendar className="w-4 h-4 text-teal-400" />
                   Festival Schedule
                 </Link>
               </div>
@@ -132,11 +132,11 @@ export default function HomePage() {
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Warrior Teams</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 text-center">
-                  <p className="text-3xl font-black text-amber-400">{eventsCount}</p>
+                  <p className="text-3xl font-black text-teal-400">{eventsCount}</p>
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Cultural Events</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 text-center">
-                  <p className="text-3xl font-black text-rose-400">{categories.length}</p>
+                  <p className="text-3xl font-black text-cyan-400">{categories.length}</p>
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Fest Categories</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 text-center">
@@ -155,7 +155,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-black uppercase tracking-wider mb-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20 text-xs font-black uppercase tracking-wider mb-2">
                   <Trophy className="w-3.5 h-3.5" />
                   Real-Time Standings
                 </div>
@@ -169,7 +169,7 @@ export default function HomePage() {
 
               <Link
                 href="/leaderboard"
-                className="inline-flex items-center gap-2 text-sm font-bold text-amber-400 hover:text-amber-300 group"
+                className="inline-flex items-center gap-2 text-sm font-bold text-teal-400 hover:text-teal-300 group"
               >
                 <span>View Full Score Matrix & Breakdown</span>
                 <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -185,12 +185,12 @@ export default function HomePage() {
                     key={team.team_id}
                     className={`relative rounded-3xl p-6 transition-all duration-300 border flex flex-col justify-between ${
                       isFirst
-                        ? 'bg-gradient-to-b from-amber-500/15 via-slate-900 to-slate-950 border-amber-500/50 shadow-2xl shadow-amber-950/30 ring-1 ring-amber-500/30'
+                        ? 'bg-gradient-to-b from-teal-500/15 via-slate-900 to-slate-950 border-teal-500/50 shadow-2xl shadow-teal-950/30 ring-1 ring-teal-500/30'
                         : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
                     }`}
                   >
                     {isFirst && (
-                      <div className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-[10px] font-black uppercase tracking-widest shadow-md">
+                      <div className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 text-[10px] font-black uppercase tracking-widest shadow-md">
                         Current Leader
                       </div>
                     )}
@@ -236,7 +236,7 @@ export default function HomePage() {
                       {/* Medals Tally */}
                       <div className="grid grid-cols-3 gap-2 text-center text-xs pt-1">
                         <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
-                          <span className="text-amber-400 font-bold block text-sm">{team.first_count}</span>
+                          <span className="text-teal-400 font-bold block text-sm">{team.first_count}</span>
                           <span className="text-[10px] text-slate-400 font-semibold uppercase">1st (Gold)</span>
                         </div>
                         <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
@@ -267,7 +267,7 @@ export default function HomePage() {
         <section className="py-20 border-b border-slate-800/80">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-              <span className="text-xs font-black uppercase tracking-wider text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
+              <span className="text-xs font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
                 Pillars of Dhwani
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -304,14 +304,14 @@ export default function HomePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
 
                       <div className="absolute top-4 left-4 p-3 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-white">
-                        <IconComponent className="w-5 h-5 text-amber-400" />
+                        <IconComponent className="w-5 h-5 text-teal-400" />
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="p-6 flex-1 flex flex-col justify-between">
                       <div className="space-y-2">
-                        <h3 className="text-2xl font-black text-white tracking-tight group-hover:text-amber-400 transition-colors">
+                        <h3 className="text-2xl font-black text-white tracking-tight group-hover:text-teal-300 transition-colors">
                           {cat.name}
                         </h3>
                         <p className="text-xs text-slate-400 leading-relaxed">
@@ -322,7 +322,7 @@ export default function HomePage() {
                       <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
                         <Link
                           href={`/events?category=${cat.id}`}
-                          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400 hover:text-amber-300"
+                          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-400 hover:text-teal-300"
                         >
                           View Events <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
@@ -348,7 +348,7 @@ export default function HomePage() {
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-black uppercase tracking-wider text-amber-400">
+                    <span className="text-xs font-black uppercase tracking-wider text-teal-400">
                       Just Announced
                     </span>
                     <h3 className="text-2xl font-black text-white tracking-tight mt-1">
@@ -357,7 +357,7 @@ export default function HomePage() {
                   </div>
                   <Link
                     href="/results"
-                    className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                    className="text-xs font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1"
                   >
                     All Results <ChevronRight className="w-4 h-4" />
                   </Link>
@@ -399,7 +399,7 @@ export default function HomePage() {
                           </div>
 
                           <div className="text-right shrink-0">
-                            <span className="text-sm font-extrabold text-amber-400">
+                            <span className="text-sm font-extrabold text-teal-400">
                               +{res.total_points} pts
                             </span>
                             {grdBadge && (
@@ -445,7 +445,7 @@ export default function HomePage() {
                           <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                             {ev.code}
                           </span>
-                          <span className="text-[10px] font-bold text-amber-400">
+                          <span className="text-[10px] font-bold text-teal-400">
                             {ev.category?.name}
                           </span>
                         </div>
@@ -497,7 +497,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/announcements"
-                className="text-sm font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                className="text-sm font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1"
               >
                 All Announcements <ChevronRight className="w-4 h-4" />
               </Link>
@@ -509,7 +509,7 @@ export default function HomePage() {
                   key={ann.id}
                   className={`p-6 rounded-3xl border flex flex-col justify-between ${
                     ann.is_pinned
-                      ? 'bg-gradient-to-br from-amber-500/10 via-slate-900 to-slate-950 border-amber-500/40'
+                      ? 'bg-gradient-to-br from-teal-500/10 via-slate-900 to-slate-950 border-teal-500/40'
                       : 'bg-slate-900/60 border-slate-800'
                   }`}
                 >
@@ -520,14 +520,14 @@ export default function HomePage() {
                           ann.category === 'URGENT'
                             ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
                             : ann.category === 'RESULT_ALERT'
-                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                            ? 'bg-teal-500/20 text-teal-300 border-teal-500/40'
                             : 'bg-blue-500/20 text-blue-300 border-blue-500/40'
                         }`}
                       >
                         {ann.category.replace('_', ' ')}
                       </span>
                       {ann.is_pinned && (
-                        <span className="text-[10px] font-bold text-amber-400 flex items-center gap-1">
+                        <span className="text-[10px] font-bold text-teal-400 flex items-center gap-1">
                           📌 Pinned Notice
                         </span>
                       )}
@@ -556,7 +556,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
               <div>
-                <span className="text-xs font-black uppercase tracking-wider text-amber-400">
+                <span className="text-xs font-black uppercase tracking-wider text-teal-400">
                   Visual Chronicle
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
@@ -565,7 +565,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/gallery"
-                className="text-sm font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                className="text-sm font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1"
               >
                 Browse Full Gallery & Albums <ChevronRight className="w-4 h-4" />
               </Link>
@@ -585,7 +585,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                   <div className="absolute bottom-4 left-4 right-4 text-xs">
                     <p className="font-bold text-white line-clamp-2">{m.caption}</p>
-                    <span className="text-[10px] text-amber-400 font-semibold uppercase tracking-wider mt-1 block">
+                    <span className="text-[10px] text-teal-400 font-semibold uppercase tracking-wider mt-1 block">
                       Featured Photograph
                     </span>
                   </div>

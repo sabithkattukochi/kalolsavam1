@@ -163,7 +163,7 @@ export default function AnnouncementsManagementPage() {
 
             <button
               onClick={openAddModal}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
             >
               <Plus className="w-4 h-4" />
               New Notice
@@ -176,7 +176,7 @@ export default function AnnouncementsManagementPage() {
                 key={ann.id}
                 className={`p-6 rounded-3xl border flex flex-col sm:flex-row sm:items-start justify-between gap-4 transition-all ${
                   ann.is_pinned
-                    ? 'bg-gradient-to-r from-amber-500/10 via-slate-900 to-slate-950 border-amber-500/40'
+                    ? 'bg-gradient-to-r from-teal-500/10 via-slate-900 to-slate-950 border-teal-500/40'
                     : 'bg-slate-900/60 border-slate-800'
                 }`}
               >
@@ -187,14 +187,14 @@ export default function AnnouncementsManagementPage() {
                         ann.category === 'URGENT'
                           ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
                           : ann.category === 'RESULT_ALERT'
-                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                          ? 'bg-teal-500/20 text-teal-300 border-teal-500/40'
                           : 'bg-slate-800 text-slate-300 border-slate-700'
                       }`}
                     >
                       {ann.category.replace('_', ' ')}
                     </span>
                     {ann.is_pinned && (
-                      <span className="text-[10px] font-bold text-amber-400 flex items-center gap-1">
+                      <span className="text-[10px] font-bold text-teal-400 flex items-center gap-1">
                         <Pin className="w-3 h-3 fill-amber-400" /> Pinned
                       </span>
                     )}
@@ -274,7 +274,7 @@ export default function AnnouncementsManagementPage() {
                       type="checkbox"
                       checked={formData.is_pinned}
                       onChange={(e) => setFormData({ ...formData, is_pinned: e.target.checked })}
-                      className="rounded text-amber-500 focus:ring-amber-500"
+                      className="rounded text-teal-400 focus:ring-teal-500"
                     />
                     <span>Pin to Top of Notice Board</span>
                   </label>
@@ -303,7 +303,7 @@ export default function AnnouncementsManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Publish Notice
                 </button>

@@ -21,7 +21,7 @@ export default function AdminLoginPage() {
       email: 'admin@fest.org',
       desc: 'Full access to all modules, team configurations, points engine, and admin permissions.',
       icon: Shield,
-      color: 'from-amber-500 to-yellow-600',
+      color: 'from-emerald-500 to-teal-600',
     },
     {
       id: 'EVENT_COORDINATOR' as AdminRole,
@@ -29,7 +29,7 @@ export default function AdminLoginPage() {
       email: 'coordinator@fest.org',
       desc: 'Manage assigned events, venues, participant rosters, and operational schedules.',
       icon: UserCheck,
-      color: 'from-blue-500 to-indigo-600',
+      color: 'from-teal-500 to-cyan-600',
     },
     {
       id: 'SCORE_MANAGER' as AdminRole,
@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
       email: 'scores@fest.org',
       desc: 'Enter and certify event results, grades, and supervise points tabulation.',
       icon: Award,
-      color: 'from-emerald-500 to-teal-600',
+      color: 'from-cyan-500 to-blue-600',
     },
   ];
 
@@ -58,16 +58,16 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center items-center p-4 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-80 bg-gradient-to-b from-amber-500/15 via-rose-500/10 to-transparent blur-3xl -z-10 pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-80 bg-gradient-to-b from-teal-500/15 via-emerald-500/10 to-transparent blur-3xl -z-10 pointer-events-none" />
 
       <div className="w-full max-w-xl space-y-8">
         {/* Brand Header */}
         <div className="text-center space-y-3">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 via-rose-500 to-indigo-600 flex items-center justify-center text-slate-950 mx-auto shadow-xl shadow-rose-950/40">
-            <Sparkles className="w-7 h-7" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-400 via-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 mx-auto shadow-xl shadow-teal-950/40">
+            <Sparkles className="w-7 h-7 text-slate-950" />
           </div>
           <div>
-            <span className="text-xs font-black uppercase tracking-widest text-amber-400">
+            <span className="text-xs font-black uppercase tracking-widest text-teal-400">
               Victoria College Cultural Board
             </span>
             <h1 className="text-3xl font-black text-white tracking-tight mt-1">
@@ -97,11 +97,11 @@ export default function AdminLoginPage() {
                     onClick={() => handleRoleSelect(r)}
                     className={`p-3 rounded-2xl border text-left transition-all ${
                       isSelected
-                        ? 'bg-amber-500/15 border-amber-500/50 shadow-md ring-1 ring-amber-500/30'
+                        ? 'bg-gradient-to-br from-emerald-500/20 to-teal-500/15 border-teal-500/50 shadow-md ring-1 ring-teal-500/30'
                         : 'bg-slate-950 border-slate-800 hover:border-slate-700'
                     }`}
                   >
-                    <Icon className={`w-4 h-4 mb-1.5 ${isSelected ? 'text-amber-400' : 'text-slate-400'}`} />
+                    <Icon className={`w-4 h-4 mb-1.5 ${isSelected ? 'text-teal-400' : 'text-slate-400'}`} />
                     <span className="text-xs font-extrabold text-white block">{r.title}</span>
                   </button>
                 );
@@ -118,28 +118,28 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
               />
             </div>
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-bold text-slate-300">Security Password</label>
-                <span className="text-[10px] text-amber-400">Pre-authenticated</span>
+                <span className="text-[10px] text-teal-400 font-semibold">Pre-authenticated</span>
               </div>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2 mt-4"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-500 hover:from-emerald-300 hover:to-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-teal-500/25 transition-all flex items-center justify-center gap-2 mt-4"
             >
               {loading ? (
                 <>

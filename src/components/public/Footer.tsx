@@ -10,12 +10,12 @@ export function Footer() {
           {/* Brand & Overview */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-600 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-rose-900/30">
-                <Sparkles className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-teal-900/40">
+                <Sparkles className="w-5 h-5 text-slate-950" />
               </div>
               <div>
                 <span className="font-black text-xl text-white tracking-tight">DHWANI 2026</span>
-                <p className="text-xs text-amber-400 font-medium">Fine Arts & Cultural Festival</p>
+                <p className="text-xs text-teal-300 font-medium">Fine Arts & Cultural Festival</p>
               </div>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
@@ -32,27 +32,27 @@ export function Footer() {
             <h4 className="text-sm font-bold uppercase tracking-wider text-slate-200 mb-4">Competitions</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/categories#chithrolsavam" className="hover:text-amber-400 transition-colors">
+                <Link href="/categories#chithrolsavam" className="hover:text-teal-300 transition-colors">
                   Chithrolsavam (Fine & Visual Arts)
                 </Link>
               </li>
               <li>
-                <Link href="/categories#sahithyolsavam" className="hover:text-amber-400 transition-colors">
+                <Link href="/categories#sahithyolsavam" className="hover:text-teal-300 transition-colors">
                   Sahithyolsavam (Literary Arts)
                 </Link>
               </li>
               <li>
-                <Link href="/categories#stage-events" className="hover:text-amber-400 transition-colors">
+                <Link href="/categories#stage-events" className="hover:text-teal-300 transition-colors">
                   Stage Events (Dance, Music, Drama)
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="hover:text-amber-400 transition-colors">
+                <Link href="/schedule" className="hover:text-teal-300 transition-colors">
                   Stage Venues & Timings
                 </Link>
               </li>
               <li>
-                <Link href="/results" className="hover:text-amber-400 transition-colors">
+                <Link href="/results" className="hover:text-teal-300 transition-colors">
                   Official Score Sheets
                 </Link>
               </li>
@@ -64,27 +64,27 @@ export function Footer() {
             <h4 className="text-sm font-bold uppercase tracking-wider text-slate-200 mb-4">Quick Links</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/leaderboard" className="hover:text-amber-400 transition-colors">
+                <Link href="/leaderboard" className="hover:text-teal-300 transition-colors">
                   Live Team Standings
                 </Link>
               </li>
               <li>
-                <Link href="/announcements" className="hover:text-amber-400 transition-colors">
+                <Link href="/announcements" className="hover:text-teal-300 transition-colors">
                   Festival Notices & Bulletins
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="hover:text-amber-400 transition-colors">
+                <Link href="/gallery" className="hover:text-teal-300 transition-colors">
                   Official Media Gallery
                 </Link>
               </li>
               <li>
-                <Link href="/history" className="hover:text-amber-400 transition-colors">
+                <Link href="/history" className="hover:text-teal-300 transition-colors">
                   Festival Archives & Past Editions
                 </Link>
               </li>
               <li>
-                <Link href="/admin/dashboard" className="text-amber-400 hover:text-amber-300 flex items-center gap-1 font-semibold">
+                <Link href="/admin/dashboard" className="text-teal-300 hover:text-teal-200 flex items-center gap-1 font-semibold">
                   <Shield className="w-3.5 h-3.5" /> Staff & Judge Portal
                 </Link>
               </li>
@@ -96,7 +96,7 @@ export function Footer() {
             <h4 className="text-sm font-bold uppercase tracking-wider text-slate-200 mb-4">Festival Helpdesk</h4>
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                 <span>Central Control Room, Victoria College Campus, Palakkad - 678001</span>
               </div>
               <div className="flex items-center gap-2.5">

@@ -242,7 +242,7 @@ export default function EventsManagementPage() {
 
             <button
               onClick={openAddModal}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
             >
               <Plus className="w-4 h-4" />
               Create Event
@@ -258,7 +258,7 @@ export default function EventsManagementPage() {
                 placeholder="Search events by name, code, venue..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500 font-medium"
               />
             </div>
 
@@ -266,7 +266,7 @@ export default function EventsManagementPage() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
               >
                 <option value="ALL">All Categories</option>
                 {categories.map((c) => (
@@ -281,7 +281,7 @@ export default function EventsManagementPage() {
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
               >
                 <option value="ALL">All Event Types</option>
                 <option value="INDIVIDUAL">Individual Solo</option>
@@ -309,7 +309,7 @@ export default function EventsManagementPage() {
                 <tbody className="divide-y divide-slate-800/60">
                   {filteredEvents.map((ev) => (
                     <tr key={ev.id} className="hover:bg-slate-800/40 transition-colors">
-                      <td className="py-3.5 px-4 font-mono font-bold text-amber-400">
+                      <td className="py-3.5 px-4 font-mono font-bold text-teal-400">
                         {ev.code}
                       </td>
                       <td className="py-3.5 px-4">
@@ -339,7 +339,7 @@ export default function EventsManagementPage() {
                       <td className="py-3.5 px-4 text-center">
                         <Link
                           href={`/admin/enrollments?eventId=${ev.id}`}
-                          className="inline-flex items-center gap-1 font-bold text-amber-400 hover:underline"
+                          className="inline-flex items-center gap-1 font-bold text-teal-400 hover:underline"
                         >
                           <Users className="w-3 h-3" />
                           {ev.registrations_count || 0}
@@ -363,7 +363,7 @@ export default function EventsManagementPage() {
                           <Link
                             href={`/admin/enrollments?eventId=${ev.id}`}
                             title="Enroll Participants"
-                            className="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all"
+                            className="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-teal-400 hover:border-teal-500/40 transition-all"
                           >
                             <UserCheck className="w-3.5 h-3.5" />
                           </Link>
@@ -627,7 +627,7 @@ export default function EventsManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Save Event
                 </button>

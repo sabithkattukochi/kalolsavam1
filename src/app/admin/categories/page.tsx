@@ -144,7 +144,7 @@ export default function CategoriesManagementPage() {
 
             <button
               onClick={openAddModal}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
             >
               <Plus className="w-4 h-4" />
               Add Category
@@ -161,7 +161,7 @@ export default function CategoriesManagementPage() {
                   {cat.image_url ? (
                     <div className="relative h-40 w-full rounded-2xl overflow-hidden">
                       <img src={cat.image_url} alt={cat.name} className="w-full h-full object-cover" />
-                      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-amber-400 border border-white/10">
+                      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-teal-400 border border-white/10">
                         Order #{cat.display_order}
                       </div>
                     </div>
@@ -299,7 +299,7 @@ export default function CategoriesManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Save Category
                 </button>

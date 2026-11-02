@@ -116,7 +116,7 @@ export default function FestivalEditionsPage() {
 
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
             >
               <Plus className="w-4 h-4" />
               New Festival Edition
@@ -131,13 +131,13 @@ export default function FestivalEditionsPage() {
                   key={fest.id}
                   className={`p-6 rounded-3xl border flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all ${
                     isCurrent
-                      ? 'bg-gradient-to-r from-amber-500/15 via-slate-900 to-slate-950 border-amber-500/50 shadow-xl'
+                      ? 'bg-gradient-to-r from-teal-500/15 via-slate-900 to-slate-950 border-teal-500/50 shadow-xl'
                       : 'bg-slate-900/60 border-slate-800'
                   }`}
                 >
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-black text-amber-400 font-mono">
+                      <span className="text-xs font-black text-teal-400 font-mono">
                         {fest.year} • {fest.edition}
                       </span>
                       {isCurrent ? (
@@ -163,7 +163,7 @@ export default function FestivalEditionsPage() {
 
                   <div className="shrink-0 flex items-center gap-3">
                     {isCurrent ? (
-                      <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-4 py-2 rounded-xl border border-amber-500/30">
+                      <span className="text-xs font-bold text-teal-400 bg-teal-500/10 px-4 py-2 rounded-xl border border-teal-500/30">
                         Currently Managing
                       </span>
                     ) : (
@@ -278,7 +278,7 @@ export default function FestivalEditionsPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Create Edition
                 </button>

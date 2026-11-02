@@ -176,12 +176,12 @@ export default function GalleryManagementPage() {
                 onClick={() => setIsAlbumModalOpen(true)}
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:bg-slate-800 text-xs font-bold transition-all"
               >
-                <Plus className="w-4 h-4 text-amber-400" /> Create Album
+                <Plus className="w-4 h-4 text-teal-400" /> Create Album
               </button>
 
               <button
                 onClick={() => setIsMediaModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
               >
                 <Camera className="w-4 h-4" /> Upload Media
               </button>
@@ -203,7 +203,7 @@ export default function GalleryManagementPage() {
                   />
                   <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
                     {item.is_featured && (
-                      <span className="p-1 rounded-md bg-amber-400 text-slate-950" title="Featured Media">
+                      <span className="p-1 rounded-md bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950" title="Featured Media">
                         <Star className="w-3.5 h-3.5 fill-slate-950" />
                       </span>
                     )}
@@ -293,7 +293,7 @@ export default function GalleryManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Create Album
                 </button>
@@ -350,7 +350,7 @@ export default function GalleryManagementPage() {
                       type="checkbox"
                       checked={mediaForm.is_featured}
                       onChange={(e) => setMediaForm({ ...mediaForm, is_featured: e.target.checked })}
-                      className="rounded text-amber-500 focus:ring-amber-500"
+                      className="rounded text-teal-400 focus:ring-teal-500"
                     />
                     <span>Feature on Homepage</span>
                   </label>
@@ -390,7 +390,7 @@ export default function GalleryManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Save Media
                 </button>

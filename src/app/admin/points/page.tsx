@@ -134,7 +134,7 @@ export default function PointsConfigurationPage() {
           {/* Engine Concept Info */}
           <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-2">
             <h2 className="text-lg font-black text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-400" />
+              <Sparkles className="w-5 h-5 text-teal-400" />
               Automated Dynamic Calculation Engine
             </h2>
             <p className="text-xs text-slate-300 leading-relaxed max-w-4xl">
@@ -146,14 +146,14 @@ export default function PointsConfigurationPage() {
             {/* Left: Editable Formulas Form */}
             <div className="lg:col-span-6 p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-6">
               <h3 className="text-base font-extrabold text-white flex items-center gap-2">
-                <Sliders className="w-4 h-4 text-amber-400" />
+                <Sliders className="w-4 h-4 text-teal-400" />
                 Edit Scoring Values
               </h3>
 
               <form onSubmit={handleSaveRules} className="space-y-6 text-xs">
                 {/* Position Points */}
                 <div className="space-y-3 p-4 rounded-2xl bg-slate-950 border border-slate-800">
-                  <span className="text-xs font-bold uppercase tracking-wider text-amber-400 block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal-400 block">
                     Position Placement Points (Solo Individual)
                   </span>
 
@@ -277,7 +277,7 @@ export default function PointsConfigurationPage() {
 
                   <button
                     type="submit"
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black uppercase tracking-wider shadow-lg shadow-amber-500/20"
+                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black uppercase tracking-wider shadow-lg shadow-teal-500/20"
                   >
                     <Save className="w-4 h-4" />
                     Apply & Recalculate Scores
@@ -289,7 +289,7 @@ export default function PointsConfigurationPage() {
             {/* Right: Detailed Points Audit Breakdown */}
             <div className="lg:col-span-6 p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-6">
               <h3 className="text-base font-extrabold text-white flex items-center gap-2">
-                <Trophy className="w-4 h-4 text-amber-400" />
+                <Trophy className="w-4 h-4 text-teal-400" />
                 Live Recalculated Team Standings
               </h3>
 
@@ -301,19 +301,19 @@ export default function PointsConfigurationPage() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <span className="w-6 h-6 rounded-lg bg-slate-900 flex items-center justify-center font-bold text-xs text-amber-400">
+                        <span className="w-6 h-6 rounded-lg bg-slate-900 flex items-center justify-center font-bold text-xs text-teal-400">
                           #{team.rank}
                         </span>
                         <strong className="text-white text-sm">{team.name}</strong>
                       </div>
-                      <span className="text-lg font-black text-amber-400">
+                      <span className="text-lg font-black text-teal-400">
                         {formatPoints(team.total_points)} pts
                       </span>
                     </div>
 
                     <div className="grid grid-cols-4 gap-2 pt-2 border-t border-slate-800/80 text-[11px] text-slate-400 text-center">
                       <div>
-                        1st: <strong className="text-amber-400">{team.first_count}</strong>
+                        1st: <strong className="text-teal-400">{team.first_count}</strong>
                       </div>
                       <div>
                         2nd: <strong className="text-slate-300">{team.second_count}</strong>

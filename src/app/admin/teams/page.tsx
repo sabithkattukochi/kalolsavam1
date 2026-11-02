@@ -176,7 +176,7 @@ export default function TeamsManagementPage() {
 
             <button
               onClick={openAddModal}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
             >
               <Plus className="w-4 h-4" />
               Create Team
@@ -222,7 +222,7 @@ export default function TeamsManagementPage() {
                         </p>
                       )}
                       {t.captain_name && (
-                        <p className="text-xs text-amber-400 font-semibold mt-1">
+                        <p className="text-xs text-teal-400 font-semibold mt-1">
                           Captain: {t.captain_name}
                         </p>
                       )}
@@ -240,7 +240,7 @@ export default function TeamsManagementPage() {
                       </div>
 
                       <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center">
-                        <span className="text-xl font-black text-amber-400 block">
+                        <span className="text-xl font-black text-teal-400 block">
                           {formatPoints(stats?.total_points || 0)}
                         </span>
                         <span className="text-[10px] text-slate-400 uppercase font-semibold">
@@ -256,7 +256,7 @@ export default function TeamsManagementPage() {
                       onClick={() => setSelectedTeamRoster(t)}
                       className="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5"
                     >
-                      <Users className="w-3.5 h-3.5 text-amber-400" />
+                      <Users className="w-3.5 h-3.5 text-teal-400" />
                       View Members ({members.length})
                     </button>
 
@@ -375,7 +375,7 @@ export default function TeamsManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Save Team
                 </button>
@@ -412,7 +412,7 @@ export default function TeamsManagementPage() {
                     className="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between text-xs"
                   >
                     <div>
-                      <span className="font-mono text-amber-400 font-bold mr-2">{st.student_id}</span>
+                      <span className="font-mono text-teal-400 font-bold mr-2">{st.student_id}</span>
                       <strong className="text-white font-bold">{st.full_name}</strong>
                       <span className="text-slate-400 ml-2">{st.course} ({st.class_grade})</span>
                     </div>

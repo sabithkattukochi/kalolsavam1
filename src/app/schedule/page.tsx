@@ -63,7 +63,7 @@ export default function SchedulePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="max-w-3xl mb-12 space-y-3">
-            <span className="text-xs font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">
+            <span className="text-xs font-black uppercase tracking-wider text-teal-400 bg-teal-500/10 px-3.5 py-1.5 rounded-full border border-teal-500/20">
               Timetable & Venues
             </span>
             <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
@@ -83,7 +83,7 @@ export default function SchedulePage() {
                 onClick={() => setSelectedDate('ALL')}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   selectedDate === 'ALL'
-                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-md'
                     : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
                 }`}
               >
@@ -95,7 +95,7 @@ export default function SchedulePage() {
                   onClick={() => setSelectedDate(d)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     selectedDate === d
-                      ? 'bg-amber-400 text-slate-950 shadow-md'
+                      ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 shadow-md'
                       : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
                   }`}
                 >
@@ -110,7 +110,7 @@ export default function SchedulePage() {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
                 >
                   <option value="ALL">All Categories</option>
                   {categories.map((c) => (
@@ -125,7 +125,7 @@ export default function SchedulePage() {
                 <select
                   value={selectedVenue}
                   onChange={(e) => setSelectedVenue(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 font-medium"
                 >
                   <option value="ALL">All Venues & Stages</option>
                   {uniqueVenues.map((v) => (
@@ -142,7 +142,7 @@ export default function SchedulePage() {
                   onClick={() => setViewMode('LIST')}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border transition-all ${
                     viewMode === 'LIST'
-                      ? 'bg-slate-800 text-amber-300 border-amber-500/30'
+                      ? 'bg-slate-800 text-teal-300 border-teal-500/30'
                       : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white'
                   }`}
                 >
@@ -152,7 +152,7 @@ export default function SchedulePage() {
                   onClick={() => setViewMode('TIMELINE')}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border transition-all ${
                     viewMode === 'TIMELINE'
-                      ? 'bg-slate-800 text-amber-300 border-amber-500/30'
+                      ? 'bg-slate-800 text-teal-300 border-teal-500/30'
                       : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white'
                   }`}
                 >
@@ -173,7 +173,7 @@ export default function SchedulePage() {
                   <div className="flex items-start gap-5">
                     {/* Time Box */}
                     <div className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-center shrink-0 w-28">
-                      <Clock className="w-4 h-4 text-amber-400 mx-auto mb-1" />
+                      <Clock className="w-4 h-4 text-teal-400 mx-auto mb-1" />
                       <span className="text-xs font-bold text-white block">{item.start_time}</span>
                       <span className="text-[10px] text-slate-400 font-semibold">{item.end_time}</span>
                     </div>
@@ -181,7 +181,7 @@ export default function SchedulePage() {
                     {/* Event & Category Info */}
                     <div className="space-y-1.5 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-black px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                        <span className="text-xs font-black px-2 py-0.5 rounded bg-teal-500/15 text-teal-300 border border-teal-500/30">
                           {item.event?.code}
                         </span>
                         <span className="text-xs font-bold text-rose-400">
@@ -211,7 +211,7 @@ export default function SchedulePage() {
                       </div>
 
                       {item.notes && (
-                        <p className="text-xs text-amber-200/80 italic mt-1">
+                        <p className="text-xs text-teal-200/80 italic mt-1">
                           Notice: {item.notes}
                         </p>
                       )}
@@ -227,7 +227,7 @@ export default function SchedulePage() {
                           : item.status === 'DELAYED'
                           ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
                           : item.status === 'RESCHEDULED'
-                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                          ? 'bg-teal-500/20 text-teal-300 border-teal-500/40'
                           : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
                       }`}
                     >
@@ -236,7 +236,7 @@ export default function SchedulePage() {
 
                     <Link
                       href={`/events?id=${item.event_id}`}
-                      className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                      className="text-xs font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1"
                     >
                       Event Details <ChevronRight className="w-3.5 h-3.5" />
                     </Link>
@@ -255,7 +255,7 @@ export default function SchedulePage() {
                   <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all space-y-3">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-amber-400 flex items-center gap-1">
+                        <span className="text-xs font-bold text-teal-400 flex items-center gap-1">
                           <Clock className="w-3.5 h-3.5" /> {item.start_time} - {item.end_time}
                         </span>
                         <span className="text-slate-400">•</span>

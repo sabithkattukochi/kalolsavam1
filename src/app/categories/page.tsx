@@ -30,7 +30,7 @@ export default function CategoriesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="max-w-3xl mb-16 space-y-4">
-            <span className="text-xs font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">
+            <span className="text-xs font-black uppercase tracking-wider text-teal-400 bg-teal-500/10 px-3.5 py-1.5 rounded-full border border-teal-500/20">
               Competition Arenas
             </span>
             <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
@@ -63,11 +63,11 @@ export default function CategoriesPage() {
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                      <div className="absolute top-4 left-4 p-3 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-amber-400">
+                      <div className="absolute top-4 left-4 p-3 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-teal-400">
                         <Icon className="w-6 h-6" />
                       </div>
                       <div className="absolute bottom-4 left-4 right-4">
-                        <span className="px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black uppercase tracking-wider">
+                        <span className="px-3 py-1 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 text-xs font-black uppercase tracking-wider">
                           {catEvents.length} Competitions
                         </span>
                       </div>
@@ -97,11 +97,11 @@ export default function CategoriesPage() {
                             <Link
                               key={ev.id}
                               href={`/events?id=${ev.id}`}
-                              className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-amber-500/40 transition-all flex items-center justify-between group"
+                              className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-teal-500/40 transition-all flex items-center justify-between group"
                             >
                               <div className="min-w-0">
-                                <span className="text-[10px] font-black text-amber-400 block">{ev.code}</span>
-                                <span className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate block">
+                                <span className="text-[10px] font-black text-teal-400 block">{ev.code}</span>
+                                <span className="text-xs font-bold text-white group-hover:text-teal-300 transition-colors truncate block">
                                   {ev.name}
                                 </span>
                               </div>
@@ -117,7 +117,7 @@ export default function CategoriesPage() {
                       <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
                         <Link
                           href={`/events?category=${cat.id}`}
-                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all"
                         >
                           Explore All {cat.name} Events
                           <ArrowRight className="w-3.5 h-3.5" />

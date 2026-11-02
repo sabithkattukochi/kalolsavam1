@@ -277,12 +277,12 @@ function EnrollmentManagementContent() {
           {/* Top Info Banner */}
           <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <Shield className="w-4 h-4 text-amber-400 shrink-0" />
+              <Shield className="w-4 h-4 text-teal-400 shrink-0" />
               <span>
                 <strong>Zero Self-Registration Policy:</strong> Only credentialed admins can enroll students into events. Duplicate entries are automatically blocked.
               </span>
             </div>
-            <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">
+            <span className="text-[10px] font-bold text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/30">
               Admin Protected
             </span>
           </div>
@@ -297,7 +297,7 @@ function EnrollmentManagementContent() {
                 <select
                   value={selectedEventId}
                   onChange={(e) => handleSelectEvent(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500 font-bold"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-teal-500 font-bold"
                 >
                   {events.map((ev) => (
                     <option key={ev.id} value={ev.id}>
@@ -313,7 +313,7 @@ function EnrollmentManagementContent() {
                     <>
                       <button
                         onClick={() => setIsSingleModalOpen(true)}
-                        className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all"
+                        className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all"
                       >
                         <UserPlus className="w-4 h-4" />
                         Enroll Student
@@ -323,7 +323,7 @@ function EnrollmentManagementContent() {
                         onClick={() => setIsBulkModalOpen(true)}
                         className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition-all"
                       >
-                        <Users className="w-4 h-4 text-amber-400" />
+                        <Users className="w-4 h-4 text-teal-400" />
                         Bulk Enroll
                       </button>
                     </>
@@ -344,7 +344,7 @@ function EnrollmentManagementContent() {
                     onClick={triggerPrint}
                     className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-300 font-bold text-xs transition-all"
                   >
-                    <Printer className="w-3.5 h-3.5 text-amber-400" />
+                    <Printer className="w-3.5 h-3.5 text-teal-400" />
                     Print Call Sheet
                   </button>
 
@@ -368,7 +368,7 @@ function EnrollmentManagementContent() {
                   <span>Time: <strong className="text-white">{activeEvent.start_time} - {activeEvent.end_time}</strong></span>
                 </div>
                 <div>
-                  Enrolled: <strong className="text-amber-400 font-bold text-sm">
+                  Enrolled: <strong className="text-teal-400 font-bold text-sm">
                     {activeEvent.event_type === 'INDIVIDUAL' ? registrations.length : groupTeams.length}
                   </strong>
                 </div>
@@ -385,7 +385,7 @@ function EnrollmentManagementContent() {
                 placeholder="Search enrolled participants or chest #..."
                 value={participantSearch}
                 onChange={(e) => setParticipantSearch(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500 font-medium"
               />
             </div>
 
@@ -394,7 +394,7 @@ function EnrollmentManagementContent() {
               <select
                 value={teamFilter}
                 onChange={(e) => setTeamFilter(e.target.value)}
-                className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500"
+                className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500"
               >
                 <option value="ALL">All Teams</option>
                 {teams.map((t) => (
@@ -425,7 +425,7 @@ function EnrollmentManagementContent() {
                   <tbody className="divide-y divide-slate-800/60">
                     {filteredRegistrations.map((reg) => (
                       <tr key={reg.id} className="hover:bg-slate-800/40 transition-colors">
-                        <td className="py-3.5 px-4 font-mono font-black text-amber-400 text-sm">
+                        <td className="py-3.5 px-4 font-mono font-black text-teal-400 text-sm">
                           #{reg.chest_number}
                         </td>
                         <td className="py-3.5 px-4 font-mono text-slate-300">
@@ -488,7 +488,7 @@ function EnrollmentManagementContent() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-black text-amber-400 text-sm px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/20">
+                        <span className="font-mono font-black text-teal-400 text-sm px-2.5 py-1 rounded bg-teal-500/10 border border-teal-500/20">
                           Chest #{grp.chest_number}
                         </span>
                         <h4 className="text-base font-black text-white">{grp.group_name}</h4>
@@ -530,7 +530,7 @@ function EnrollmentManagementContent() {
                           className="p-2 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between text-xs"
                         >
                           <div>
-                            <span className="font-mono text-amber-400 text-[11px] mr-2">
+                            <span className="font-mono text-teal-400 text-[11px] mr-2">
                               {m.student?.student_id}
                             </span>
                             <span className="font-bold text-white">{m.student?.full_name}</span>
@@ -618,7 +618,7 @@ function EnrollmentManagementContent() {
                 <button
                   type="submit"
                   disabled={!selectedStudentId}
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider disabled:opacity-50"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider disabled:opacity-50"
                 >
                   Confirm Enrollment
                 </button>
@@ -666,7 +666,7 @@ function EnrollmentManagementContent() {
                       key={s.id}
                       className={`flex items-center justify-between p-2.5 rounded-xl border cursor-pointer text-xs transition-colors ${
                         isChecked
-                          ? 'bg-amber-500/15 border-amber-500/50 text-white'
+                          ? 'bg-teal-500/15 border-teal-500/50 text-white'
                           : 'bg-slate-900 border-slate-800/80 text-slate-300 hover:border-slate-700'
                       }`}
                     >
@@ -681,10 +681,10 @@ function EnrollmentManagementContent() {
                               setBulkSelectedStudentIds(bulkSelectedStudentIds.filter((id) => id !== s.id));
                             }
                           }}
-                          className="rounded border-slate-700 text-amber-500 focus:ring-amber-500"
+                          className="rounded border-slate-700 text-teal-400 focus:ring-teal-500"
                         />
                         <div>
-                          <span className="font-mono text-amber-400 mr-2">[{s.student_id}]</span>
+                          <span className="font-mono text-teal-400 mr-2">[{s.student_id}]</span>
                           <span className="font-bold">{s.full_name}</span>
                           <span className="text-[11px] text-slate-400 block">{s.course} • {s.department}</span>
                         </div>
@@ -707,7 +707,7 @@ function EnrollmentManagementContent() {
 
             <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
               <span className="text-slate-400">
-                Selected: <strong className="text-amber-400">{bulkSelectedStudentIds.length}</strong> students
+                Selected: <strong className="text-teal-400">{bulkSelectedStudentIds.length}</strong> students
               </span>
 
               <div className="flex gap-2">
@@ -722,7 +722,7 @@ function EnrollmentManagementContent() {
                   type="button"
                   onClick={handleBulkEnroll}
                   disabled={bulkSelectedStudentIds.length === 0}
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider disabled:opacity-50"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider disabled:opacity-50"
                 >
                   Enroll Selected ({bulkSelectedStudentIds.length})
                 </button>
@@ -832,7 +832,7 @@ function EnrollmentManagementContent() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider"
                 >
                   Save Group Squad
                 </button>

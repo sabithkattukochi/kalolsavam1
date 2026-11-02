@@ -242,7 +242,7 @@ export default function AdminReportsPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <span className="p-2 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20">
                   <FileSpreadsheet className="w-5 h-5" />
                 </span>
                 <h1 className="text-xl font-black text-white">Festival Reports & Data Export</h1>
@@ -271,7 +271,7 @@ export default function AdminReportsPage() {
               </button>
               <button
                 onClick={triggerPrint}
-                className="flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-black transition-all shadow-lg shadow-amber-950/40 cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950 rounded-xl text-xs font-black transition-all shadow-lg shadow-teal-950/40 cursor-pointer"
               >
                 <Printer className="w-4 h-4" />
                 Print Call Sheet
@@ -327,13 +327,13 @@ export default function AdminReportsPage() {
                   onClick={() => setActiveReport(tab.id as ReportType)}
                   className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-amber-500/10 border-amber-500/40 text-amber-300 shadow-sm'
+                      ? 'bg-teal-500/10 border-teal-500/40 text-teal-300 shadow-sm'
                       : 'bg-slate-900/40 border-slate-800/80 text-slate-400 hover:bg-slate-900 hover:text-slate-200'
                   }`}
                 >
                   <Icon
                     className={`w-4 h-4 mb-2 ${
-                      isActive ? 'text-amber-400' : 'text-slate-400'
+                      isActive ? 'text-teal-400' : 'text-slate-400'
                     }`}
                   />
                   <div className="text-xs font-black truncate">{tab.label}</div>
@@ -352,7 +352,7 @@ export default function AdminReportsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search across report data..."
-                className="w-full pl-9 pr-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500"
+                className="w-full pl-9 pr-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500"
               />
             </div>
 
@@ -363,7 +363,7 @@ export default function AdminReportsPage() {
                 <select
                   value={selectedEventId}
                   onChange={(e) => setSelectedEventId(e.target.value)}
-                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium"
+                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-teal-500 font-medium"
                 >
                   <option value="ALL">All Events ({events.length})</option>
                   {events.map((e) => (
@@ -382,7 +382,7 @@ export default function AdminReportsPage() {
                 <select
                   value={selectedTeamId}
                   onChange={(e) => setSelectedTeamId(e.target.value)}
-                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium"
+                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-teal-500 font-medium"
                 >
                   <option value="ALL">All Teams</option>
                   {teams.map((t) => (

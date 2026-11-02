@@ -233,14 +233,14 @@ function ResultsManagementContent() {
           )}
 
           {/* Point Rules Summary Badge */}
-          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-wrap items-center justify-between gap-4 text-xs text-amber-200">
+          <div className="p-4 rounded-2xl bg-teal-500/10 border border-teal-500/30 flex flex-wrap items-center justify-between gap-4 text-xs text-teal-200">
             <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
+              <Sparkles className="w-5 h-5 text-teal-400 shrink-0" />
               <div>
                 <strong>Active Point Scoring Scheme:</strong> 1st: {pointRule.first_place_points} pts | 2nd: {pointRule.second_place_points} pts | 3rd: {pointRule.third_place_points} pts | Grade A: {pointRule.grade_a_points} pts | Grade B: {pointRule.grade_b_points} pts | Group Multiplier: {pointRule.group_multiplier}x
               </div>
             </div>
-            <span className="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-amber-400 text-slate-950">
+            <span className="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 text-slate-950">
               Automatic Engine Active
             </span>
           </div>
@@ -254,7 +254,7 @@ function ResultsManagementContent() {
               <select
                 value={selectedEventId}
                 onChange={(e) => handleSelectEvent(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500 font-bold"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-teal-500 font-bold"
               >
                 {events.map((ev) => (
                   <option key={ev.id} value={ev.id}>
@@ -268,7 +268,7 @@ function ResultsManagementContent() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={openAddModal}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all"
                 >
                   <Plus className="w-4 h-4" />
                   Award Score / Grade
@@ -278,7 +278,7 @@ function ResultsManagementContent() {
                   onClick={triggerPrint}
                   className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-300 font-bold text-xs"
                 >
-                  <Printer className="w-3.5 h-3.5 text-amber-400" />
+                  <Printer className="w-3.5 h-3.5 text-teal-400" />
                   Print Score Sheet
                 </button>
               </div>
@@ -361,7 +361,7 @@ function ResultsManagementContent() {
                           <td className="py-3.5 px-4 text-center text-slate-400 text-[11px]">
                             Pos: {res.position_points} + Grd: {res.grade_points}
                           </td>
-                          <td className="py-3.5 px-4 text-right font-black text-amber-400 text-sm">
+                          <td className="py-3.5 px-4 text-right font-black text-teal-400 text-sm">
                             +{formatPoints(res.total_points)}
                           </td>
                           <td className="py-3.5 px-4">
@@ -370,7 +370,7 @@ function ResultsManagementContent() {
                               className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border transition-colors ${
                                 isPublished
                                   ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/25'
-                                  : 'bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/25'
+                                  : 'bg-teal-500/15 text-teal-300 border-teal-500/30 hover:bg-amber-500/25'
                               }`}
                             >
                               {res.status}
@@ -516,7 +516,7 @@ function ResultsManagementContent() {
                 <button
                   type="submit"
                   disabled={!formData.target_id}
-                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider disabled:opacity-50"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-bold uppercase tracking-wider disabled:opacity-50"
                 >
                   Save Result
                 </button>
