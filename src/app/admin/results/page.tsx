@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   Award,
@@ -29,7 +29,7 @@ import {
 import { getPositionBadge, getGradeBadge, formatPoints } from '@/lib/utils';
 import { triggerPrint } from '@/lib/export-utils';
 
-export default function ResultsManagementPage() {
+function ResultsManagementContent() {
   const [mounted, setMounted] = useState(false);
   const searchParams = useSearchParams();
   const initialEventId = searchParams.get('eventId');
@@ -526,6 +526,14 @@ export default function ResultsManagementPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ResultsManagementPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">Loading Results...</div>}>
+      <ResultsManagementContent />
+    </Suspense>
   );
 }
 

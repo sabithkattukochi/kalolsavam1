@@ -21,8 +21,8 @@ export default function FestivalEditionsPage() {
     description: '',
     college_name: 'Victoria State Arts & Science College',
     banner_url: '',
-    start_date: new Date().toISOString().split('T')[0],
-    end_date: new Date(Date.now() + 4 * 86400000).toISOString().split('T')[0],
+    start_date: '',
+    end_date: '',
   });
 
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -34,6 +34,11 @@ export default function FestivalEditionsPage() {
   useEffect(() => {
     setMounted(true);
     refreshData();
+    setFormData((prev) => ({
+      ...prev,
+      start_date: new Date().toISOString().split('T')[0],
+      end_date: new Date(Date.now() + 4 * 86400000).toISOString().split('T')[0],
+    }));
   }, []);
 
   const handleSwitchActive = (id: string) => {

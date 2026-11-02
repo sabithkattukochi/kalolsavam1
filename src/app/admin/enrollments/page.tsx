@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   UserCheck,
@@ -24,7 +24,7 @@ import { dataStore } from '@/lib/data-store';
 import { FestivalEvent, Student, EventRegistration, GroupEventTeam, Team } from '@/types/database';
 import { exportToCSV, triggerPrint } from '@/lib/export-utils';
 
-export default function EnrollmentManagementPage() {
+function EnrollmentManagementContent() {
   const [mounted, setMounted] = useState(false);
   const searchParams = useSearchParams();
   const initialEventId = searchParams.get('eventId');
@@ -842,6 +842,14 @@ export default function EnrollmentManagementPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function EnrollmentManagementPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">Loading Enrollments...</div>}>
+      <EnrollmentManagementContent />
+    </Suspense>
   );
 }
 

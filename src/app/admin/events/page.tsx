@@ -43,7 +43,7 @@ export default function EventsManagementPage() {
     event_type: 'INDIVIDUAL' as 'INDIVIDUAL' | 'GROUP',
     min_participants: 1,
     max_participants: 1,
-    date: new Date().toISOString().split('T')[0],
+    date: '',
     start_time: '10:00 AM',
     end_time: '12:00 PM',
     venue: 'Main Auditorium',
@@ -70,6 +70,10 @@ export default function EventsManagementPage() {
   useEffect(() => {
     setMounted(true);
     refreshData();
+    setFormData((prev) => ({
+      ...prev,
+      date: new Date().toISOString().split('T')[0],
+    }));
   }, []);
 
   const openAddModal = () => {
