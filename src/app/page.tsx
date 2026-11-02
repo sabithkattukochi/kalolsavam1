@@ -126,6 +126,13 @@ export default function HomePage() {
               <Calendar className="w-3.5 h-3.5 text-cyan-400" />
               <span>Program Schedule</span>
             </Link>
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 text-xs font-bold border border-teal-500/30 transition-all shadow-sm"
+            >
+              <Users className="w-3.5 h-3.5 text-teal-400" />
+              <span>Login Portals ▾</span>
+            </Link>
           </div>
 
           {/* Quick Item Code Search */}

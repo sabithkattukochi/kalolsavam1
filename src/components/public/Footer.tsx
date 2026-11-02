@@ -83,10 +83,22 @@ export function Footer() {
                   Festival Archives & Past Editions
                 </Link>
               </li>
-              <li>
-                <Link href="/admin/dashboard" className="text-teal-300 hover:text-teal-200 flex items-center gap-1 font-semibold">
-                  <Shield className="w-3.5 h-3.5" /> Staff & Judge Portal
-                </Link>
+              <li className="pt-2 border-t border-slate-800">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-400 block mb-1">Official Portals</span>
+                <div className="flex flex-col space-y-1 text-xs">
+                  <Link href="/login/admin" className="text-slate-300 hover:text-white flex items-center gap-1 font-medium">
+                    <Shield className="w-3 h-3 text-emerald-400" /> Admin & Officer Login
+                  </Link>
+                  <Link href="/login/team" className="text-slate-300 hover:text-white flex items-center gap-1 font-medium">
+                    <Award className="w-3 h-3 text-teal-400" /> School / Team Login
+                  </Link>
+                  <Link href="/login/judge" className="text-slate-300 hover:text-white flex items-center gap-1 font-medium">
+                    <Sparkles className="w-3 h-3 text-cyan-400" /> Judge Scoring Console
+                  </Link>
+                  <Link href="/login/student" className="text-slate-300 hover:text-white flex items-center gap-1 font-medium">
+                    <Heart className="w-3 h-3 text-amber-400" /> Student Admit Card / Pass
+                  </Link>
+                </div>
               </li>
             </ul>
           </div>

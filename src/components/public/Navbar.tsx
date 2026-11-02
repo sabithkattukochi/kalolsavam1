@@ -19,9 +19,13 @@ import {
   LogIn,
   LogOut,
   ChevronDown,
+  School,
+  Scale,
+  GraduationCap,
+  ArrowRight,
 } from 'lucide-react';
 import { dataStore } from '@/lib/data-store';
-import { AdminProfile } from '@/types/database';
+import { AdminProfile, Team, JudgeProfile, Student } from '@/types/database';
 
 interface NavbarProps {
   festivalName?: string;
@@ -32,15 +36,22 @@ export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: Na
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [loginDropdownOpen, setLoginDropdownOpen] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState<AdminProfile | null>(null);
+  const [currentTeam, setCurrentTeam] = useState<Team | null>(null);
 
   useEffect(() => {
     setCurrentAdmin(dataStore.getCurrentAdmin());
+    setCurrentTeam(dataStore.getCurrentTeam());
   }, [pathname]);
 
   const handleLogout = () => {
     dataStore.logout();
+    dataStore.logoutTeam();
+    dataStore.logoutJudge();
+    dataStore.logoutStudent();
     setCurrentAdmin(null);
+    setCurrentTeam(null);
     setUserDropdownOpen(false);
     window.location.href = '/';
   };
@@ -113,7 +124,98 @@ export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: Na
               Live Scores
             </Link>
 
-            {/* Login 👤 ▾ Option (Reference: Kerala Kalolsavam Image 2) */}
+            {/* Login 👤 ▾ Interactive Dropdown (Reference: Kerala Kalolsavam Image 2) */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
+                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-slate-200 bg-slate-900 hover:bg-slate-800 hover:text-white border border-slate-700/80 hover:border-teal-500/50 rounded-xl transition-all shadow-sm"
+              >
+                <User className="w-3.5 h-3.5 text-teal-400" />
+                <span>Login ▾</span>
+              </button>
+
+              {loginDropdownOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-72 rounded-2xl bg-slate-950/95 border border-teal-500/30 shadow-2xl p-2.5 z-50 space-y-1.5 backdrop-blur-xl animate-in fade-in slide-in-from-top-2"
+                  onMouseLeave={() => setLoginDropdownOpen(false)}
+                >
+                  <div className="px-3 py-1.5 border-b border-slate-800/80">
+                    <p className="text-[10px] font-black uppercase tracking-wider text-teal-400">Kalolsavam Login Portals</p>
+                    <p className="text-[11px] text-slate-400">Select your official access role</p>
+                  </div>
+
+                  <Link
+                    href="/login/admin"
+                    onClick={() => setLoginDropdownOpen(false)}
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900 transition-colors group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+                      <Shield className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-white group-hover:text-emerald-300 transition-colors">Admin & Officers</div>
+                      <div className="text-[10px] text-slate-400">Convener, Event Coordinators, Score Officers</div>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/login/team"
+                    onClick={() => setLoginDropdownOpen(false)}
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900 transition-colors group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+                      <School className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-white group-hover:text-teal-300 transition-colors">School / Team Captain</div>
+                      <div className="text-[10px] text-slate-400">House Captains, Rosters & Chest Numbers</div>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/login/judge"
+                    onClick={() => setLoginDropdownOpen(false)}
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900 transition-colors group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+                      <Scale className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">Judge & Jury Evaluation</div>
+                      <div className="text-[10px] text-slate-400">Stage Jury Marking & Score Tabulation</div>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/login/student"
+                    onClick={() => setLoginDropdownOpen(false)}
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900 transition-colors group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+                      <GraduationCap className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">Student / Participant</div>
+                      <div className="text-[10px] text-slate-400">Admit Card, Stage Timetable & Score Card</div>
+                    </div>
+                  </Link>
+
+                  <div className="pt-1.5 border-t border-slate-800/80">
+                    <Link
+                      href="/login"
+                      onClick={() => setLoginDropdownOpen(false)}
+                      className="w-full flex items-center justify-center gap-1.5 py-1.5 text-center text-xs font-bold text-teal-400 hover:text-teal-300 rounded-lg hover:bg-slate-900 transition-colors"
+                    >
+                      <span>All Login Portals Hub</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Admin Active Profile Button */}
             {currentAdmin ? (
               <div className="relative">
                 <button
@@ -159,21 +261,13 @@ export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: Na
               </div>
             ) : (
               <Link
-                href="/login"
-                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-slate-200 bg-slate-900 hover:bg-slate-800 hover:text-white border border-slate-700/80 hover:border-teal-500/50 rounded-xl transition-all shadow-sm"
+                href="/login/admin"
+                className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 rounded-xl shadow-md shadow-teal-500/25 transition-all transform hover:-translate-y-0.5"
               >
-                <User className="w-3.5 h-3.5 text-teal-400" />
-                <span>Login ▾</span>
+                <Shield className="w-3.5 h-3.5" />
+                Admin Portal
               </Link>
             )}
-
-            <Link
-              href={currentAdmin ? '/admin/dashboard' : '/login'}
-              className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 rounded-xl shadow-md shadow-teal-500/25 transition-all transform hover:-translate-y-0.5"
-            >
-              <Shield className="w-3.5 h-3.5" />
-              Admin Portal
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -216,6 +310,45 @@ export function Navbar({ festivalName = 'DHWANI', festivalEdition = '2026' }: Na
               <Shield className="w-4 h-4" />
               {currentAdmin ? 'Admin Console' : 'Admin Login'}
             </Link>
+          </div>
+
+          {/* Quick Login Portals Strip */}
+          <div className="py-2 border-b border-slate-800/80">
+            <p className="text-[10px] font-black uppercase text-teal-400 tracking-wider mb-2">Kalolsavam Portals</p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <Link
+                href="/login/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 flex items-center gap-1.5"
+              >
+                <Shield className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Admin Portal</span>
+              </Link>
+              <Link
+                href="/login/team"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 flex items-center gap-1.5"
+              >
+                <School className="w-3.5 h-3.5 text-teal-400" />
+                <span>Team Login</span>
+              </Link>
+              <Link
+                href="/login/judge"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 flex items-center gap-1.5"
+              >
+                <Scale className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Judge Scoring</span>
+              </Link>
+              <Link
+                href="/login/student"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 flex items-center gap-1.5"
+              >
+                <GraduationCap className="w-3.5 h-3.5 text-amber-400" />
+                <span>Student Pass</span>
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => {

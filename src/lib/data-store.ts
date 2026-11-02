@@ -15,6 +15,8 @@ import {
   Announcement,
   AdminProfile,
   AdminRole,
+  JudgeProfile,
+  GradeType,
   AuditLog,
   TeamLeaderboardItem,
   StudentLeaderboardItem,
@@ -885,6 +887,36 @@ const INITIAL_ADMINS: AdminProfile[] = [
   },
 ];
 
+const INITIAL_JUDGES: JudgeProfile[] = [
+  {
+    id: 'judge-1',
+    judge_code: 'JUDGE-01',
+    full_name: 'Dr. Vinod Narayanan',
+    email: 'judge1@fest.org',
+    assigned_category: 'Sahithyolsavam (Literary Arts)',
+    assigned_venue: 'Seminar Hall 2 / Room 204',
+    avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+  },
+  {
+    id: 'judge-2',
+    judge_code: 'JUDGE-02',
+    full_name: 'Smt. Deepa Padmanabhan',
+    email: 'judge2@fest.org',
+    assigned_category: 'Stage Events (Classical & Folk Dance)',
+    assigned_venue: 'Main Open-Air Auditorium / Stage 1',
+    avatar_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
+  },
+  {
+    id: 'judge-3',
+    judge_code: 'JUDGE-03',
+    full_name: 'Prof. Sarah Mathew',
+    email: 'judge3@fest.org',
+    assigned_category: 'Chithrolsavam (Visual & Fine Arts)',
+    assigned_venue: 'Fine Arts Studio A & B / Hall 1',
+    avatar_url: 'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=200&q=80',
+  },
+];
+
 const INITIAL_AUDIT_LOGS: AuditLog[] = [
   {
     id: 'audit-1',
@@ -1043,6 +1075,158 @@ class DataStore {
     this.currentAdmin = newAdmin;
     this.saveToStorage();
     return newAdmin;
+  }
+
+  // --- Team Session & Auth ---
+  private currentTeam: Team | null = null;
+
+  getCurrentTeam(): Team | null {
+    if (!this.currentTeam && typeof window !== 'undefined') {
+      const stored = sessionStorage.getItem('kalolsavam_current_team');
+      if (stored) {
+        try {
+          this.currentTeam = JSON.parse(stored);
+        } catch {}
+      }
+    }
+    return this.currentTeam;
+  }
+
+  authenticateTeam(teamCodeOrEmail: string, password: string): { success: boolean; team?: Team; error?: string } {
+    const clean = teamCodeOrEmail.trim().toLowerCase();
+    const team = this.teams.find((t) =>
+      t.code.toLowerCase() === clean ||
+      t.name.toLowerCase() === clean ||
+      t.name.toLowerCase().includes(clean) ||
+      (t.captain_name && t.captain_name.toLowerCase().includes(clean)) ||
+      `${t.code.toLowerCase()}@fest.org` === clean
+    );
+    if (!team) {
+      return { success: false, error: 'No college house/team found matching that code or email.' };
+    }
+    const validPasswords = ['ihrd@2026', 'victoria@2026', 'admin123', 'kalolsavam2026', 'team123', 'password'];
+    if (!validPasswords.includes(password.trim())) {
+      return { success: false, error: 'Incorrect team security password. Please check your credentials.' };
+    }
+    this.currentTeam = team;
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('kalolsavam_current_team', JSON.stringify(team));
+    }
+    return { success: true, team };
+  }
+
+  logoutTeam() {
+    this.currentTeam = null;
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('kalolsavam_current_team');
+    }
+  }
+
+  // --- Judge Session & Auth ---
+  private judges: JudgeProfile[] = [...INITIAL_JUDGES];
+  private currentJudge: JudgeProfile | null = null;
+
+  getJudges(): JudgeProfile[] {
+    return [...this.judges];
+  }
+
+  getCurrentJudge(): JudgeProfile | null {
+    if (!this.currentJudge && typeof window !== 'undefined') {
+      const stored = sessionStorage.getItem('kalolsavam_current_judge');
+      if (stored) {
+        try {
+          this.currentJudge = JSON.parse(stored);
+        } catch {}
+      }
+    }
+    return this.currentJudge;
+  }
+
+  authenticateJudge(judgeIdOrEmail: string, password: string): { success: boolean; judge?: JudgeProfile; error?: string } {
+    const clean = judgeIdOrEmail.trim().toLowerCase();
+    const judge = this.judges.find((j) =>
+      j.judge_code.toLowerCase() === clean ||
+      j.email.toLowerCase() === clean ||
+      j.full_name.toLowerCase().includes(clean)
+    );
+    if (!judge) {
+      return { success: false, error: 'No judge panel or tabulator account found for this ID/email.' };
+    }
+    const validPasswords = ['ihrd@2026', 'victoria@2026', 'judge123', 'kalolsavam2026', 'password'];
+    if (!validPasswords.includes(password.trim())) {
+      return { success: false, error: 'Incorrect jury access pin/password. Please check credentials.' };
+    }
+    this.currentJudge = judge;
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('kalolsavam_current_judge', JSON.stringify(judge));
+    }
+    return { success: true, judge };
+  }
+
+  logoutJudge() {
+    this.currentJudge = null;
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('kalolsavam_current_judge');
+    }
+  }
+
+  // --- Student / Participant Auth ---
+  private currentStudent: Student | null = null;
+
+  getCurrentStudent(): Student | null {
+    if (!this.currentStudent && typeof window !== 'undefined') {
+      const stored = sessionStorage.getItem('kalolsavam_current_student');
+      if (stored) {
+        try {
+          this.currentStudent = JSON.parse(stored);
+        } catch {}
+      }
+    }
+    return this.currentStudent;
+  }
+
+  authenticateStudent(studentIdOrChestNumber: string, passwordOrPin?: string): { 
+    success: boolean; 
+    student?: Student; 
+    registrations?: EventRegistration[];
+    error?: string 
+  } {
+    const clean = studentIdOrChestNumber.trim().toLowerCase();
+    let student = this.students.find((s) => s.student_id.toLowerCase() === clean || s.full_name.toLowerCase().includes(clean));
+    
+    let matchedReg: EventRegistration | undefined;
+    if (!student) {
+      matchedReg = this.registrations.find((r) => r.chest_number.toLowerCase() === clean);
+      if (matchedReg) {
+        student = this.students.find((s) => s.id === matchedReg?.student_id);
+      }
+    }
+
+    if (!student) {
+      return { success: false, error: 'No participant record found for this Student ID or Chest Number.' };
+    }
+
+    if (passwordOrPin && passwordOrPin.trim()) {
+      const validPins = ['ihrd@2026', 'victoria@2026', '2026', 'password', '1234'];
+      if (!validPins.includes(passwordOrPin.trim())) {
+        return { success: false, error: 'Invalid verification pin or date of birth.' };
+      }
+    }
+
+    this.currentStudent = student;
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('kalolsavam_current_student', JSON.stringify(student));
+    }
+
+    const studentRegs = this.registrations.filter((r) => r.student_id === student?.id);
+    return { success: true, student, registrations: studentRegs };
+  }
+
+  logoutStudent() {
+    this.currentStudent = null;
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('kalolsavam_current_student');
+    }
   }
 
   // --- Festivals ---

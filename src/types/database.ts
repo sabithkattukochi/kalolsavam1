@@ -14,6 +14,16 @@ export type AnnouncementCategory = 'GENERAL' | 'SCHEDULE_CHANGE' | 'RESULT_ALERT
 export type AdminRole = 'SUPER_ADMIN' | 'EVENT_COORDINATOR' | 'SCORE_MANAGER';
 export type MediaType = 'IMAGE' | 'VIDEO';
 
+export interface JudgeProfile {
+  id: string;
+  judge_code: string; // e.g. JUDGE-01
+  full_name: string;
+  email: string;
+  assigned_category: string;
+  assigned_venue: string;
+  avatar_url?: string;
+}
+
 export interface Festival {
   id: string;
   name: string;
