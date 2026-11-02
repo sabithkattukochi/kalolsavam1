@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { History, Plus, CheckCircle2, Sparkles, X, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { History, Plus, CheckCircle2, Sparkles, X, AlertCircle, Upload, Image as ImageIcon, Trash2, Camera, ExternalLink } from 'lucide-react';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { AdminHeader } from '@/components/admin/AdminHeader';
 import { dataStore } from '@/lib/data-store';
@@ -26,9 +26,81 @@ export default function FestivalEditionsPage() {
   });
 
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [bannerInputUrl, setBannerInputUrl] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
 
   const refreshData = () => {
     setFestivals(dataStore.getFestivals());
+  };
+
+  const activeFestival = festivals.find((f) => f.is_current) || festivals[0];
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage({ type: 'error', text: 'Image size exceeds 5MB limit. Please choose a smaller image.' });
+      return;
+    }
+
+    setIsUploading(true);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const dataUrl = reader.result as string;
+      try {
+        if (activeFestival) {
+          dataStore.updateFestival(activeFestival.id, { banner_url: dataUrl });
+          setMessage({ type: 'success', text: 'Festival cover banner uploaded and updated successfully!' });
+          refreshData();
+        }
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : 'Upload failed';
+        setMessage({ type: 'error', text: msg });
+      } finally {
+        setIsUploading(false);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSaveBannerUrl = () => {
+    if (!bannerInputUrl.trim() || !activeFestival) return;
+    try {
+      dataStore.updateFestival(activeFestival.id, { banner_url: bannerInputUrl.trim() });
+      setMessage({ type: 'success', text: 'Festival cover banner URL updated successfully!' });
+      setBannerInputUrl('');
+      refreshData();
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to update banner URL';
+      setMessage({ type: 'error', text: msg });
+    }
+  };
+
+  const handleSetPresetBanner = (url: string, name: string) => {
+    if (!activeFestival) return;
+    try {
+      dataStore.updateFestival(activeFestival.id, { banner_url: url });
+      setMessage({ type: 'success', text: `Preset banner "${name}" applied!` });
+      refreshData();
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to apply preset';
+      setMessage({ type: 'error', text: msg });
+    }
+  };
+
+  const handleRemoveBanner = () => {
+    if (!activeFestival) return;
+    try {
+      dataStore.updateFestival(activeFestival.id, { banner_url: null });
+      setMessage({ type: 'success', text: 'Banner reset to default cultural artwork.' });
+      refreshData();
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to reset banner';
+      setMessage({ type: 'error', text: msg });
+    }
   };
 
   useEffect(() => {
@@ -107,6 +179,176 @@ export default function FestivalEditionsPage() {
               </button>
             </div>
           )}
+
+          {/* FESTIVAL COVER / BANNER MANAGEMENT CARD */}
+          <div id="banner" className="p-6 rounded-3xl bg-slate-900/90 border border-teal-500/30 shadow-xl space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-500/15 text-teal-300 border border-teal-500/30 text-[10px] font-black uppercase tracking-wider mb-1">
+                  <Camera className="w-3 h-3" />
+                  Website Header Banner
+                </div>
+                <h2 className="text-lg font-black text-white">Festival Cover & Banner Image</h2>
+                <p className="text-xs text-slate-400">
+                  Upload an official cover banner to display prominently across the website header for {activeFestival?.name}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                {activeFestival?.banner_url && (
+                  <button
+                    onClick={handleRemoveBanner}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-rose-500/20 text-slate-300 hover:text-rose-300 border border-slate-700 hover:border-rose-500/40 text-xs font-bold transition-all"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    Reset Banner
+                  </button>
+                )}
+                <a
+                  href="/"
+                  target="_blank"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-bold transition-all"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  Preview on Site
+                </a>
+              </div>
+            </div>
+
+            {/* Banner Preview Area */}
+            <div className="relative w-full h-40 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 group">
+              {activeFestival?.banner_url ? (
+                <img
+                  src={activeFestival.banner_url}
+                  alt="Festival Banner Preview"
+                  className="w-full h-full object-cover object-center"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-r from-emerald-950/40 via-slate-900 to-cyan-950/40">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-2">
+                    <ImageIcon className="w-6 h-6" />
+                  </div>
+                  <p className="text-sm font-bold text-white">Default Kerala Cultural Banner Active</p>
+                  <p className="text-xs text-slate-400 max-w-sm mt-0.5">
+                    Traditional Kathakali, Mohiniyattam, and Kalolsavam Malayalam calligraphy are displayed. Upload a custom banner below to replace it.
+                  </p>
+                </div>
+              )}
+
+              <div className="absolute bottom-3 left-3 px-3 py-1 rounded-xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-white text-xs font-bold">
+                {activeFestival?.name} • {activeFestival?.edition}
+              </div>
+            </div>
+
+            {/* Upload Options Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+              {/* Option 1: Direct File Upload */}
+              <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Upload className="w-4 h-4 text-emerald-400" />
+                  <h4 className="text-xs font-bold text-slate-200">Upload Image File</h4>
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Select an image (PNG, JPG, WebP) from your computer. Recommended aspect ratio 16:9 or 21:9 (1920x480px).
+                </p>
+
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                  id="banner-file-input"
+                />
+
+                <label
+                  htmlFor="banner-file-input"
+                  className={`w-full py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer font-bold text-xs uppercase tracking-wider transition-all ${
+                    isUploading
+                      ? 'bg-slate-800 text-slate-400 cursor-wait'
+                      : 'bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 shadow-md shadow-teal-500/20'
+                  }`}
+                >
+                  <Camera className="w-4 h-4" />
+                  {isUploading ? 'Processing Image...' : 'Choose File to Upload'}
+                </label>
+              </div>
+
+              {/* Option 2: Image URL Input */}
+              <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-3">
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-cyan-400" />
+                  <h4 className="text-xs font-bold text-slate-200">Or Paste Image URL</h4>
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Provide an external web URL to any high-resolution banner image.
+                </p>
+
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    placeholder="https://example.com/banner.jpg"
+                    value={bannerInputUrl}
+                    onChange={(e) => setBannerInputUrl(e.target.value)}
+                    className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-teal-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleSaveBannerUrl}
+                    disabled={!bannerInputUrl.trim()}
+                    className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-40 text-slate-950 font-bold text-xs transition-all"
+                  >
+                    Save URL
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Presets */}
+            <div className="pt-2">
+              <span className="text-[11px] font-bold text-slate-400 block mb-2">
+                Quick Cultural Art Presets:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleSetPresetBanner(
+                      'https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=1920&q=80',
+                      'Kathakali Performing Arts'
+                    )
+                  }
+                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold transition-all border border-slate-700"
+                >
+                  🎭 Kathakali & Classical Arts
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleSetPresetBanner(
+                      'https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=1920&q=80',
+                      'Traditional Temple & Cultural Stage'
+                    )
+                  }
+                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold transition-all border border-slate-700"
+                >
+                  🎪 Cultural Stage & Lights
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleSetPresetBanner(
+                      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1920&q=80',
+                      'Celebration Night'
+                    )
+                  }
+                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold transition-all border border-slate-700"
+                >
+                  ✨ Festive Celebration
+                </button>
+              </div>
+            </div>
+          </div>
 
           <div className="flex items-center justify-between">
             <div>

@@ -15,6 +15,7 @@ import {
   Clock,
   MapPin,
   ChevronRight,
+  ChevronLeft,
   Palette,
   BookOpen,
   Music,
@@ -22,9 +23,15 @@ import {
   Users,
   Eye,
   Camera,
+  Search,
+  Radio,
+  Building2,
+  GraduationCap,
+  Star,
 } from 'lucide-react';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
+import { FestivalBanner } from '@/components/public/FestivalBanner';
 import { dataStore } from '@/lib/data-store';
 import { getPositionBadge, getGradeBadge, formatPoints, formatDate } from '@/lib/utils';
 import { TeamLeaderboardItem, FestivalEvent, Announcement, EventResult, GalleryMedia } from '@/types/database';
@@ -37,6 +44,7 @@ export default function HomePage() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [recentResults, setRecentResults] = useState<EventResult[]>([]);
   const [featuredMedia, setFeaturedMedia] = useState<GalleryMedia[]>([]);
+  const [resultCarouselIndex, setResultCarouselIndex] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -44,7 +52,7 @@ export default function HomePage() {
     setLeaderboard(dataStore.getTeamLeaderboard());
     setEvents(dataStore.getEvents().slice(0, 4));
     setAnnouncements(dataStore.getAnnouncements().slice(0, 3));
-    setRecentResults(dataStore.getResults(undefined, true).slice(0, 4));
+    setRecentResults(dataStore.getResults(undefined, true));
     setFeaturedMedia(dataStore.getMedia().filter((m) => m.is_featured).slice(0, 4));
   }, []);
 
@@ -61,9 +69,94 @@ export default function HomePage() {
   const eventsCount = dataStore.getEvents().length;
   const categories = dataStore.getCategories();
 
+  const handleNextResult = () => {
+    if (recentResults.length === 0) return;
+    setResultCarouselIndex((prev) => (prev + 1) % recentResults.length);
+  };
+
+  const handlePrevResult = () => {
+    if (recentResults.length === 0) return;
+    setResultCarouselIndex((prev) => (prev - 1 + recentResults.length) % recentResults.length);
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-teal-500 selection:text-slate-950">
+      {/* 1. TOP OFFICIAL FESTIVAL COVER / BANNER (Reference: Kerala Kalolsavam Header) */}
+      <FestivalBanner festival={festival} showAdminAction={true} />
+
+      {/* 2. MAIN NAVIGATION */}
       <Navbar festivalName={festival.name} festivalEdition={festival.edition} />
+
+      {/* 3. QUICK ACTION SUB-BAR (Reference: Kerala Kalolsavam Stage Status, Venues & Item Search) */}
+      <div className="w-full bg-slate-950/90 border-b border-cyan-900/40 px-4 py-2.5 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href="/schedule"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/30 text-xs font-bold transition-all shadow-sm"
+            >
+              <Radio className="w-3.5 h-3.5 text-rose-400 animate-pulse" />
+              <span>Status of Stages</span>
+            </Link>
+            <Link
+              href="/schedule"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-800 transition-all"
+            >
+              <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Venues</span>
+            </Link>
+            <Link
+              href="/results"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-800 transition-all"
+            >
+              <Award className="w-3.5 h-3.5 text-teal-400" />
+              <span>Results</span>
+            </Link>
+            <Link
+              href="/leaderboard"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-800 transition-all"
+            >
+              <Trophy className="w-3.5 h-3.5 text-amber-400" />
+              <span>Leading Teams</span>
+            </Link>
+            <Link
+              href="/schedule"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-800 transition-all"
+            >
+              <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Program Schedule</span>
+            </Link>
+          </div>
+
+          {/* Quick Item Code Search */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const input = e.currentTarget.elements.namedItem('search') as HTMLInputElement;
+              if (input?.value.trim()) {
+                window.location.href = `/events?search=${encodeURIComponent(input.value.trim())}`;
+              }
+            }}
+            className="flex items-center gap-2"
+          >
+            <div className="relative">
+              <input
+                type="text"
+                name="search"
+                placeholder="Item Code / Event..."
+                className="w-48 sm:w-60 bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 pr-8 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-teal-500"
+              />
+              <button
+                type="submit"
+                className="absolute right-1 top-1 p-1 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 transition-all"
+                title="Search Event"
+              >
+                <Search className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
 
       <main className="flex-1">
         {/* ========================================================
@@ -149,114 +242,138 @@ export default function HomePage() {
         </section>
 
         {/* ========================================================
-            LIVE TEAM LEADERBOARD HIGHLIGHT
+            LIVE TEAM LEADERBOARD & PODIUM (Reference: Kerala Kalolsavam LEADING DISTRICTS)
             ======================================================== */}
-        <section className="py-20 border-b border-slate-800/80 bg-slate-950/60">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20 text-xs font-black uppercase tracking-wider mb-2">
-                  <Trophy className="w-3.5 h-3.5" />
-                  Real-Time Standings
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                  Team Leaderboard
-                </h2>
-                <p className="text-sm text-slate-400 mt-1">
-                  Updated automatically as certified results are submitted and published by festival judges.
-                </p>
-              </div>
+        <section className="py-20 border-b border-cyan-900/40 bg-gradient-to-b from-slate-950 via-slate-900/80 to-slate-950 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-              <Link
-                href="/leaderboard"
-                className="inline-flex items-center gap-2 text-sm font-bold text-teal-400 hover:text-teal-300 group"
-              >
-                <span>View Full Score Matrix & Breakdown</span>
-                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Kerala Kalolsavam Leading Districts Title */}
+            <div className="text-center space-y-2 mb-12">
+              <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-widest text-amber-300 uppercase drop-shadow-md">
+                LEADING TEAMS
+              </h2>
+              <p className="text-xs sm:text-sm text-teal-200/80 font-medium">
+                Official Real-Time Championship Standings & Points Tally
+              </p>
             </div>
 
-            {/* Podium Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {leaderboard.map((team, idx) => {
-                const isFirst = idx === 0;
-                return (
-                  <div
-                    key={team.team_id}
-                    className={`relative rounded-3xl p-6 transition-all duration-300 border flex flex-col justify-between ${
-                      isFirst
-                        ? 'bg-gradient-to-b from-teal-500/15 via-slate-900 to-slate-950 border-teal-500/50 shadow-2xl shadow-teal-950/30 ring-1 ring-teal-500/30'
-                        : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
-                    }`}
-                  >
-                    {isFirst && (
-                      <div className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 text-[10px] font-black uppercase tracking-widest shadow-md">
-                        Current Leader
+            {/* Reference 3D Trophy Podium Grid (Center Elevated #1, Left #2, Right #3) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end max-w-5xl mx-auto mb-10">
+              {/* #2 PODIUM CARD (Left) */}
+              {leaderboard[1] && (
+                <div className="order-2 md:order-1 rounded-3xl p-6 bg-slate-900/80 border border-slate-700/80 backdrop-blur-md shadow-xl text-center space-y-4 hover:border-slate-600 transition-all">
+                  <div className="w-10 h-10 rounded-full bg-slate-700/60 border border-slate-500/40 text-slate-200 font-black text-sm flex items-center justify-center mx-auto shadow-sm">
+                    2
+                  </div>
+                  <div>
+                    <span
+                      className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border"
+                      style={{
+                        borderColor: `${leaderboard[1].color}50`,
+                        backgroundColor: `${leaderboard[1].color}20`,
+                        color: leaderboard[1].color,
+                      }}
+                    >
+                      {leaderboard[1].code}
+                    </span>
+                    <h3 className="text-xl font-black text-white mt-1.5">{leaderboard[1].name}</h3>
+                  </div>
+                  <div className="pt-2">
+                    <span className="text-3xl sm:text-4xl font-black text-slate-100 block">
+                      {formatPoints(leaderboard[1].total_points)}
+                    </span>
+                    <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase mt-0.5 block">
+                      POINTS
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* #1 PODIUM CARD (Center Elevated with Golden Trophy) */}
+              {leaderboard[0] && (
+                <div className="order-1 md:order-2 rounded-3xl p-7 bg-gradient-to-b from-teal-500/20 via-slate-900 to-slate-950 border-2 border-amber-400/60 shadow-2xl shadow-amber-500/20 text-center space-y-4 transform md:-translate-y-4 ring-1 ring-amber-400/30 relative">
+                  {/* Glowing 3D Golden Trophy Artwork */}
+                  <div className="relative mx-auto w-24 h-24 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-amber-400/25 rounded-full blur-xl animate-pulse pointer-events-none" />
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-300 p-[2px] shadow-lg shadow-amber-500/40 flex items-center justify-center">
+                      <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <Trophy className="w-10 h-10 text-amber-400 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.8)]" />
                       </div>
-                    )}
-
-                    <div>
-                      {/* Rank & Team Badge */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div
-                          className="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-xl shadow-inner"
-                          style={{ backgroundColor: `${team.color}25`, color: team.color }}
-                        >
-                          #{team.rank}
-                        </div>
-                        <span
-                          className="px-2.5 py-1 rounded-full text-xs font-black tracking-wider border"
-                          style={{
-                            borderColor: `${team.color}40`,
-                            backgroundColor: `${team.color}15`,
-                            color: team.color,
-                          }}
-                        >
-                          {team.code}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl font-extrabold text-white tracking-tight">{team.name}</h3>
-                      {team.motto && (
-                        <p className="text-xs text-slate-400 italic line-clamp-1 mt-1 font-serif">
-                          &ldquo;{team.motto}&rdquo;
-                        </p>
-                      )}
-
-                      {/* Points Tally */}
-                      <div className="my-6 p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                        <span className="text-4xl font-black text-white tracking-tight">
-                          {formatPoints(team.total_points)}
-                        </span>
-                        <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mt-0.5">
-                          Total Points
-                        </span>
-                      </div>
-
-                      {/* Medals Tally */}
-                      <div className="grid grid-cols-3 gap-2 text-center text-xs pt-1">
-                        <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
-                          <span className="text-teal-400 font-bold block text-sm">{team.first_count}</span>
-                          <span className="text-[10px] text-slate-400 font-semibold uppercase">1st (Gold)</span>
-                        </div>
-                        <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
-                          <span className="text-slate-300 font-bold block text-sm">{team.second_count}</span>
-                          <span className="text-[10px] text-slate-400 font-semibold uppercase">2nd (Silver)</span>
-                        </div>
-                        <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
-                          <span className="text-amber-600 font-bold block text-sm">{team.third_count}</span>
-                          <span className="text-[10px] text-slate-400 font-semibold uppercase">3rd (Bronze)</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                      <span>Total Awards: <strong className="text-white">{team.total_awards}</strong></span>
-                      <span className="text-emerald-400 font-semibold">Grade A: {team.grade_a_count}</span>
                     </div>
                   </div>
-                );
-              })}
+
+                  <div className="w-9 h-9 rounded-full bg-amber-400 text-slate-950 font-black text-sm flex items-center justify-center mx-auto shadow-md">
+                    1
+                  </div>
+
+                  <div>
+                    <span
+                      className="px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border shadow-sm"
+                      style={{
+                        borderColor: `${leaderboard[0].color}50`,
+                        backgroundColor: `${leaderboard[0].color}25`,
+                        color: leaderboard[0].color,
+                      }}
+                    >
+                      {leaderboard[0].code} • Current Leader
+                    </span>
+                    <h3 className="text-2xl font-black text-white tracking-tight mt-1.5">
+                      {leaderboard[0].name}
+                    </h3>
+                  </div>
+
+                  <div className="pt-2">
+                    <span className="text-4xl sm:text-5xl font-black text-amber-300 block tracking-tight drop-shadow-sm">
+                      {formatPoints(leaderboard[0].total_points)}
+                    </span>
+                    <span className="text-xs font-black tracking-widest text-amber-400 uppercase mt-0.5 block">
+                      POINTS
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* #3 PODIUM CARD (Right) */}
+              {leaderboard[2] && (
+                <div className="order-3 md:order-3 rounded-3xl p-6 bg-slate-900/80 border border-slate-700/80 backdrop-blur-md shadow-xl text-center space-y-4 hover:border-slate-600 transition-all">
+                  <div className="w-10 h-10 rounded-full bg-amber-800/60 border border-amber-600/40 text-amber-200 font-black text-sm flex items-center justify-center mx-auto shadow-sm">
+                    3
+                  </div>
+                  <div>
+                    <span
+                      className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border"
+                      style={{
+                        borderColor: `${leaderboard[2].color}50`,
+                        backgroundColor: `${leaderboard[2].color}20`,
+                        color: leaderboard[2].color,
+                      }}
+                    >
+                      {leaderboard[2].code}
+                    </span>
+                    <h3 className="text-xl font-black text-white mt-1.5">{leaderboard[2].name}</h3>
+                  </div>
+                  <div className="pt-2">
+                    <span className="text-3xl sm:text-4xl font-black text-slate-100 block">
+                      {formatPoints(leaderboard[2].total_points)}
+                    </span>
+                    <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase mt-0.5 block">
+                      POINTS
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* View Detailed Standings Link (Matching Image 2) */}
+            <div className="text-center pt-2">
+              <Link
+                href="/leaderboard"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-teal-500/40 text-xs font-black uppercase tracking-widest text-teal-300 hover:text-white transition-all shadow-lg shadow-teal-950/40 group"
+              >
+                <span>VIEW DETAILED STANDINGS</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-teal-400" />
+              </Link>
             </div>
           </div>
         </section>
@@ -335,6 +452,128 @@ export default function HomePage() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        {/* ========================================================
+            LATEST RESULTS – PARTICIPANTS (Reference: Kerala Kalolsavam Image 1)
+            ======================================================== */}
+        <section className="py-16 border-b border-cyan-900/40 bg-slate-950/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-serif font-black tracking-wider text-white uppercase">
+                  LATEST RESULTS – PARTICIPANTS
+                </h2>
+                <p className="text-xs text-teal-300/80 font-medium mt-0.5">
+                  Certified event winners & participant certificates
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrevResult}
+                  className="w-9 h-9 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-sm"
+                  aria-label="Previous result"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNextResult}
+                  className="w-9 h-9 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-sm"
+                  aria-label="Next result"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {recentResults.length === 0 ? (
+              <div className="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 text-center text-slate-400 text-sm">
+                No certified participant results published yet. Check back soon.
+              </div>
+            ) : (
+              (() => {
+                const currentRes = recentResults[resultCarouselIndex] || recentResults[0];
+                const samplePhotos = [
+                  'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80',
+                  'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+                  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80',
+                ];
+                const photoUrl = samplePhotos[resultCarouselIndex % samplePhotos.length];
+                const teamName = currentRes.team?.name || 'Independent';
+
+                return (
+                  <div className="rounded-3xl bg-slate-900/90 border border-cyan-900/40 overflow-hidden shadow-2xl flex flex-col md:flex-row items-stretch">
+                    {/* Participant Photo with District/Team Ribbon (Image 1 reference) */}
+                    <div className="relative w-full md:w-56 h-64 md:h-auto shrink-0 bg-slate-950 flex flex-col justify-end overflow-hidden">
+                      <img
+                        src={photoUrl}
+                        alt={currentRes.student?.full_name || 'Participant'}
+                        className="absolute inset-0 w-full h-full object-cover object-top filter contrast-[1.05]"
+                      />
+                      <div className="relative z-10 w-full bg-slate-950/90 border-t border-cyan-500/30 text-center py-2 px-3 backdrop-blur-md">
+                        <span
+                          className="text-xs font-black tracking-widest uppercase block truncate"
+                          style={{ color: currentRes.team?.color || '#38bdf8' }}
+                        >
+                          {teamName}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Participant Details (Image 1 reference) */}
+                    <div className="p-6 md:p-8 flex-1 flex flex-col justify-between space-y-4">
+                      <div className="space-y-3">
+                        {/* Event Pill: e.g. 601 • CHITHRA RACHANA - PENCIL */}
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-[11px] font-black uppercase tracking-wider text-teal-300">
+                          <span>{currentRes.event?.code || 'EV-01'}</span>
+                          <span>•</span>
+                          <span>{currentRes.event?.name}</span>
+                        </div>
+
+                        {/* Student Name */}
+                        <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
+                          {currentRes.student?.full_name || currentRes.group_team?.group_name || 'Participant Name'}
+                        </h3>
+
+                        {/* Grade Badge: GRADE A */}
+                        <div>
+                          <span className="inline-block px-3 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-black uppercase tracking-wider">
+                            GRADE {currentRes.grade || 'A'}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Institution / College Line */}
+                      <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+                        <div className="flex items-center gap-2 text-slate-300 font-medium">
+                          <Building2 className="w-4 h-4 text-teal-400 shrink-0" />
+                          <span>
+                            {festival.college_name} • {currentRes.student?.course || currentRes.student?.department || 'Department of Fine Arts'}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-black text-teal-300">
+                            +{currentRes.total_points} Points Awarded
+                          </span>
+                          <Link
+                            href="/results"
+                            className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-all"
+                          >
+                            View Result Sheet →
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()
+            )}
           </div>
         </section>
 

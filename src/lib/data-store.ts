@@ -1036,6 +1036,18 @@ class DataStore {
     return newFest;
   }
 
+  updateFestival(id: string, updates: Partial<Festival>): Festival {
+    const idx = this.festivals.findIndex((f) => f.id === id);
+    if (idx === -1) throw new Error('Festival edition not found');
+    this.festivals[idx] = {
+      ...this.festivals[idx],
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    this.saveToStorage();
+    return this.festivals[idx];
+  }
+
   // --- Teams ---
   getTeams(festivalId?: string): Team[] {
     const fId = festivalId || this.getActiveFestival().id;
